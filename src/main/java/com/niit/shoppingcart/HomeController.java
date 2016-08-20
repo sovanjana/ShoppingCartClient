@@ -7,11 +7,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
 	
-	/*@RequestMapping
-	public String homePage() {
-		return "Home";
-	}*/
-	
 	@RequestMapping("/")
 	public ModelAndView home() {
 		
@@ -37,7 +32,7 @@ public class HomeController {
 		
 		ModelAndView mv = new ModelAndView("Registration");
 		
-		mv.addObject("userClickedLoginHere", "true");
+		mv.addObject("userClickedRegisterHere", "true");
 		return mv;
 		
 	}

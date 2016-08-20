@@ -9,11 +9,11 @@
 <body>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	
-	<c:if test="${#}">
+	<c:if test="${userClickedLoginHere}">
 	<jsp:include page="Login.jsp"></jsp:include>
 	</c:if>
 
-	<c:if test="${#}">
+	<c:if test="${userClickedRegisterHere}">
 	<jsp:include page="Registration.jsp"></jsp:include>
 	</c:if>
 	
