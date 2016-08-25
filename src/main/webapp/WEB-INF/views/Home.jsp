@@ -62,7 +62,7 @@
 
                 <ul class="nav navbar-nav navbar-left">
                     <li><a href="home">Home</a></li>
-                    <li class="dropdown yamm-fw">
+                    <%--<li class="dropdown yamm-fw">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Men<b class="caret"></b></a>
                         <ul class="dropdown-menu">
 
@@ -255,12 +255,12 @@
                                 </div>      <!-- /.yamm-content -->
                             </li>
                         </ul>
-                    </li>
+                    </li>--%>
                     <li><a href="#">Contact</a></li>                                    
                     
                     <c:choose>
                     	<c:when test = "${empty loggedUser}">
-                    		<li><a href="#">login</a></li>                    
+                    		<li><a href="login">login</a></li>                    
                     		<li><a href="#">Register</a></li>
                     	</c:when>
                     	<c:when test="${not empty loggedUser}">
@@ -275,7 +275,7 @@
 
             <div class="navbar-collapse collapse right" id="basket-overview">
                 <a href="#" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i></a>
-            </div>      <!--/.nav-collapse -->
+            </div>      /.nav-collapse
 
             <div class="navbar-collapse collapse right">
                 <button type="button" class="btn navbar-btn btn-default" data-toggle="collapse" data-target="#search">
@@ -317,7 +317,7 @@
 
    <!--  ~~~~~~ LOGIN MODAL START ~~~~~ -->
 
-    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+    <%-- <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
         <div class="modal-dialog modal-sm">
 
             <div class="modal-content">
@@ -346,15 +346,55 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --%>
 
     <!-- ~~~~~~ LOGIN MODAL END ~~~~~ -->
 
     
     <!-- ********************************************** NAVBAR END ************************************************** -->
 
+	<!-- Admin -->
+	
+	<div id="admin">
+		<c:if test="${isAdmin == true }">
+			<%@include  file= "admin.jsp"%>
+		</c:if>
+		<div id="supplier">
+			<c:if test="${isAdminClickedSuppliers == true}">
+				<%@ include file = "admin.jsp" %>
+				<%@ include file = "supplier.jsp" %>
+			</c:if>
+		</div>
+		<div id="category">
+			<c:if test="${isAdminClickedCategories == true}">
+				<%@ include file = "admin.jsp" %>
+				<%@ include file = "category.jsp" %>
+			</c:if>
+		</div>
+		<div id="product">
+			<c:if test="${isAdminClickedProducts == true}">
+				<%@ include file = "admin.jsp" %>
+				<%@ include file = "product.jsp" %>
+			</c:if>
+		</div>
+		
+	</div>
+	<div id="loginHere">
+		<c:if test="${userClickedLogin == true || invalidData == true}">
+			<div id="error">
+				${errorMessage}
+			</div>
+			<%@ include file = "login.jsp" %>
+		</c:if>		
+	</div>
+	
+	
+	
+	
+	
+	
 
-    <!-- ********************************************* SLIDER START ************************************************ -->
+<%--     <!-- ********************************************* SLIDER START ************************************************ -->
 
 
     <div id="slider" class="owl-carousel owl-theme">
@@ -546,10 +586,10 @@
 
     </div>    <!-- /#footer -->
 
-    <!-- ************************************************ FOOTER END ******************************************************** -->
+   <!-- ************************************************ FOOTER END ******************************************************** -->
 
     <!-- *********************************************** COPYRIGHT ********************************************************** -->
-
+ 
     <div id="copyright">
 
         <div class="container">
@@ -566,9 +606,9 @@
     
     <!-- ********************************************* COPYRIGHT END ******************************************************** -->
     </div>
-    <!-- /#all -->
+    <!-- /#all --> 
 
-    
+    --%>
 
 
     <!-- #### JAVASCRIPT FILES ### -->
