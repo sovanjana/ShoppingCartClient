@@ -4,66 +4,63 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.niit.shoppingcart.dao.CategoryDAO;
 import com.niit.shoppingcart.model.Category;
-import com.niit.shoppingcart.model.Supplier;
 
 
 @Controller
 public class CategoryController {
 	
-	Logger log = LoggerFactory.getLogger(CategoryController.class);
-	
-	@Autowired
-	Category category;
+Logger log = LoggerFactory.getLogger(CategoryController.class);
 	
 	@Autowired
 	private CategoryDAO categoryDAO;
 	
 	@Autowired
+	Category category;
+
+	@Autowired
 	public void setCategoryDAO(CategoryDAO categoryDAO) {
 		this.categoryDAO = categoryDAO;
-	}
-
+	}	
 	/*
-	 *  method : listCategory
+	 *  method : listProduct
 	 *  
-	 *  ${listCategory}
+	 *  ${category}
+	 *  ${categorylist}
 	 */
-	@RequestMapping(value = "/category", method = RequestMethod.GET)
-	public ModelAndView listCategory(){
-		log.debug("listCategory method starts...");
+	@RequestMapping(value="/category", method = RequestMethod.GET)
+	public String listCategory(Model model){
+		log.debug("listCategory method starts....");
 		
-		ModelAndView mv = new ModelAndView("home");
-		mv.addObject("category", new Category());
-		mv.addObject("listCategory", this.categoryDAO.list());
+		model.addAttribute("category", new Category());
+		model.addAttribute("categoryList", categoryDAO.list());
 		
-		log.debug("listCategory method starts...");
-		return mv;
-	}
-	
+		log.debug("listCategory method ends....");
+		return "redirect:/adminCategory";
+	}	
 	/*
 	 *  method : saveOrUpdateCategory
 	 *  
-	 *  ${saveOrUpdateCategory}
+	 *  
 	 */
-	@RequestMapping(value = "/category/saveorupdate", method = RequestMethod.POST)
-	public String saveOrUpdateCategory(@ModelAttribute("category") Category category){
-		log.debug("saveOrUpdateCategory method starts...");
+	@RequestMapping(value="/category/saveorupdate", method = RequestMethod.POST)
+	public String saveOrUpdateCategory(@ModelAttribute("category") Category category, Model model){
+		log.debug("saveOrUpdateCategory method startss....");
 		
-		categoryDAO.saveOrUpdate(category);
-
-		log.debug("saveOrUpdateCategory method starts...");
+		model.addAttribute("addCategory", categoryDAO.saveOrUpdate(category));
+		
+		log.debug("saveOrUpdateCategory method ends....");
 		return "redirect:/category";
 	}
-	
 	/*
 	 *  method : deleteCategory
 	 *  
@@ -71,26 +68,7 @@ public class CategoryController {
 	 */
 	@RequestMapping("category/delete/{id}")
 	public String deleteCategory(@PathVariable("id") String id, ModelMap model) throws Exception{
-		
-		/*
-		log.debug("deleteCategory method starts...");
-		
-		ModelAndView mv = new ModelAndView("home");
-		try{
-			category = categoryDAO.get(id);
-			categoryDAO.delete(category);
-			mv.addObject("message", "Selected Category deleted successfully...");
-		}
-		catch(Exception e){
-			mv.addObject("message", e.getMessage());
-			e.printStackTrace();
-		}		
-		log.debug("deleteCategory method starts...");
-		return mv;
-		*/
-		
-		
-		log.debug("deleteSupplier method starts....");
+		log.debug("deleteCategory method starts....");
 		
 		try{
 			category = categoryDAO.get(id);			
@@ -101,27 +79,44 @@ public class CategoryController {
 			model.addAttribute("message", e.getMessage());
 			e.printStackTrace();
 		}
-		//redirectAttrs.addFlashAttribute(arg0,arg1)
-		
-		log.debug("deleteSupplier method ends....");
+
+		log.debug("deleteCategory method ends....");
 		return "redirect:/category";
 	}
-	
+	/* 
+	 * 	..........Delete ends...........
+	 * 
+	 *	..........Edit starts...........  
+	 * 
+	 *  method : editSelectedCategory
+	 *  
+	 *  ${selectedCategory}
+	 *  ${selectedCategoryList}
+	 */
+	@RequestMapping(value = "category/edit/{id}")
+	public String editSelectedCategory(@PathVariable("id") String id, Model model, RedirectAttributes redirectAttributes){
+		
+		redirectAttributes.addFlashAttribute("selectedCategory", categoryDAO.get(id));
+		redirectAttributes.addFlashAttribute("selectedCategoryList", categoryDAO.list());
+		redirectAttributes.addFlashAttribute("isAdminClickedCategories", "true");
+		
+		return "redirect:/editcategory";
+	}
 	/*
 	 *  method : editCategory
 	 *  
-	 *  ${isAdminClickedCategories}
+	 *  ${category}
+	 *  ${categoryList}
 	 */
-	@RequestMapping("category/edit/{id}")
-	public ModelAndView editCategory(@PathVariable("id") String id){
-		log.debug("editCategory method starts...");
+	@RequestMapping(value = "/editcategory", method = RequestMethod.GET)
+	public String editCategory(@ModelAttribute("selectedCategory") final Object selectedCategory, @ModelAttribute("selectedCategoryList") final Object selectedCategoryList, Model model){
 		
-		ModelAndView mv = new ModelAndView("home");
-		mv.addObject("category", this.categoryDAO.get(id));
-		mv.addObject("listCAtegory", this.categoryDAO.list());
-		mv.addObject("isAdminClickedCategories", "true");
-		
-		log.debug("editCategory method ends...");
-		return mv;
+		model.addAttribute("category", selectedCategory);
+		model.addAttribute("categoryList", selectedCategoryList);
+		model.addAttribute("editMsg", "Category edited successfull...");
+		return "/home";
 	}
+	/*
+	 *	..........Edit ends...........
+	 */
 }

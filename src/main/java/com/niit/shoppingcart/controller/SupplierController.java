@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.niit.shoppingcart.dao.SupplierDAO;
 import com.niit.shoppingcart.model.Supplier;
@@ -30,36 +30,46 @@ public class SupplierController {
 	public void setSupplierDAO(SupplierDAO supplierDAO) {
 		this.supplierDAO = supplierDAO;
 	}	
+	
 	/*
+	 * 	..........list starts...........
+	 * 
 	 *  method : listProduct
 	 *  
-	 *  ${supplierlist}
+	 *  ${supplierList}
 	 */
 	@RequestMapping(value="/supplier", method = RequestMethod.GET)
 	public String listSupplier(Model model){
 		log.debug("listSupplier method starts....");
 		
 		model.addAttribute("supplier", new Supplier());
-		model.addAttribute("supplierlist", this.supplierDAO.list());
+		model.addAttribute("supplierList", supplierDAO.list());
 		
 		log.debug("listSupplier method ends....");
 		return "redirect:/adminSupplier";
 	}	
 	/*
-	 *  method : saveOrUpdateSupplier
+	 * 	..........list ends...........
+	 * 
+	 *  ..........saveOrUpdate starts...........
 	 *  
-	 *  ${saveOrUpdateSupplier}
+	 *  method : saveOrUpdateSupplier  
+	 *  
 	 */
 	@RequestMapping(value="/supplier/saveorupdate", method = RequestMethod.POST)
-	public String saveOrUpdateSupplier(@ModelAttribute("supplier") Supplier supplier){
+	public String saveOrUpdateSupplier(@ModelAttribute("supplier") Supplier supplier, Model model){
 		log.debug("saveOrUpdateSupplier method startss....");
 		
-		supplierDAO.saveOrUpdate(supplier);
+		model.addAttribute("addSupplier", supplierDAO.saveOrUpdate(supplier));
 		
 		log.debug("saveOrUpdateSupplier method ends....");
 		return "redirect:/supplier";
 	}
 	/*
+	 * 	..........saveOrUpdate ends...........
+	 * 
+	 * 	..........Delete starts...........	
+	 * 
 	 *  method : deleteSupplier
 	 *  
 	 *  ${message}
@@ -82,22 +92,38 @@ public class SupplierController {
 		log.debug("deleteSupplier method ends....");
 		return "redirect:/supplier";
 	}
+	/* 
+	 * 	..........Delete ends...........
+	 * 
+	 *	..........Edit starts...........  
+	 * 
+	 *  method : editSelectedSupplier
+	 *  
+	 *  
+	 */
+	@RequestMapping(value = "supplier/edit/{id}")
+	public String editSelectedSupplier(@PathVariable("id") String id, Model model, RedirectAttributes redirectAttributes){
+		
+		redirectAttributes.addFlashAttribute("selectedSupplier", supplierDAO.get(id));
+		redirectAttributes.addFlashAttribute("selectedSupplierList", supplierDAO.list());
+		redirectAttributes.addFlashAttribute("isAdminClickedSuppliers", "true");
+		
+		return "redirect:/editsupplier";
+	}
 	/*
 	 *  method : editSupplier
 	 *  
-	 *  ${isAdminClickedSuppliers}
+	 *  ${supplier}
+	 *  ${supplierList}
 	 */
-	@RequestMapping("/supplier/edit/{id}")
-	public ModelAndView editSupplier(@PathVariable("id") String id){
-		log.debug("editSupplier method starts....");
+	@RequestMapping(value = "/editsupplier", method = RequestMethod.GET)
+	public String editSupplier(@ModelAttribute("selectedSupplier") final Object selectedSupplier,@ModelAttribute("selectedSupplierList") final Object selectedSupplierList, Model model){
 		
-		ModelAndView model=new ModelAndView("home");
-		System.out.println("editSupplier");
-		model.addObject("supplier", this.supplierDAO.get(id));
-		model.addObject("listSupplier", this.supplierDAO.list());
-		model.addObject("isAdminClickedSuppliers", "true");
-		
-		log.debug("editSupplier method ends....");
-		return model;
+		model.addAttribute("supplier", selectedSupplier);
+		model.addAttribute("supplierList", selectedSupplierList);
+		return "/home";
 	}
+	/*
+	 *	..........Edit ends...........
+	 */
 }

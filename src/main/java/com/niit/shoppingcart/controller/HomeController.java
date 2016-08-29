@@ -7,9 +7,11 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.niit.shoppingcart.dao.CategoryDAO;
@@ -42,55 +44,24 @@ public class HomeController {
 	@Autowired
 	UserDetailsDAO userDetailsDAO;
 	
-
-	//  ${categoryList}
-	
-	@RequestMapping("/home")
-	public ModelAndView home(HttpSession session) {		
-		log.debug("home method starts....");
+	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *	method : onLoad
+	 *
+	 *	${category}
+	 *	${categoryList}	
+	 */
+	@RequestMapping(value = { "/", "/home"})
+	public ModelAndView onLoad(HttpSession session) {		
+		log.debug("onLoad method starts....");
 		
 		ModelAndView mv = new ModelAndView("home");
 		session.setAttribute("category", category);
-		session.setAttribute("categoryList",categoryDAO.list()); 
-		
-		log.debug("home method ends....");
+		session.setAttribute("categoryList", categoryDAO.list()); 
+				
+		log.debug("onLoad method ends....");
 		return mv;
 	}
-	/*
-	 *	method : register
-	 *
-	 *	${registerSuccess}	
-	 */
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ModelAndView register(@ModelAttribute UserDetails userDetails){
-		log.debug("register method starts...");
-		
-		userDetailsDAO.save(userDetails);
-		
-		ModelAndView mv = new ModelAndView("home");		
-		mv.addObject("registerSuccess", "You have successfully registered...");
-		
-		log.debug("register method ends...");
-		return mv;
-	}
-	/*
-	 *	method : registerHere
-	 *
-	 *	${userClickedRegister}	
-	 */
-	@RequestMapping(value = "/registration")
-	public ModelAndView registerHere(){
-		log.debug("registerHere method starts...");		
-		
-		ModelAndView mv = new ModelAndView("home");
-		mv.addObject("userDetails", userDetails);
-		mv.addObject("userClickedRegister", "true");
-		
-		log.debug("registerHere method ends...");
-		return mv;
-		
-	}
-	/*
+	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	 *	method : login
 	 *
 	 *	${userClickedLogin}	
@@ -104,6 +75,39 @@ public class HomeController {
 		mv.addObject("userClickedLogin", "true");
 		
 		log.debug("login method ends...");
+		return mv;
+	}		
+	
+	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *	method : registerHere
+	 *
+	 */
+	@RequestMapping(value = "/register")	//, method = RequestMethod.POST)
+	public ModelAndView registerHere(){
+		
+		ModelAndView mv = new ModelAndView("home");
+		mv.addObject("userDetails", userDetails);
+		mv.addObject("userClickedRegister", "true");
+		//mv.addObject("userList", userDetailsDAO.list());
+		
+		return mv;
+	}
+	
+	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *	method : saveUserDetails
+	 *
+	 *	${addUser}
+	 */
+	@RequestMapping(value="/registration", method = RequestMethod.POST)
+	public ModelAndView saveUserDetails(@ModelAttribute("userDetails") UserDetails userDetails, Model model){
+		log.debug("saveUserDetails method startss....");
+		
+		ModelAndView mv = new ModelAndView("home");
+		mv.addObject("userDetails", userDetails);
+		mv.addObject("addUser", userDetailsDAO.save(userDetails));
+		mv.addObject("registrationMsg", "You have successfully registered...");
+		
+		log.debug("saveUserDetails method ends....");
 		return mv;
 	}
 }

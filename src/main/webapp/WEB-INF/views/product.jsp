@@ -20,8 +20,9 @@
 				<div class="col-md-4 col-md-offset-4">
 					<div class="table-responsive">
 						<h2>Manage Product</h2>
+						<c:url var="addProduct" value="/product/saveorupdate"></c:url>
 						<form:form action="${addProduct}" commandName="product">
-						<%-- <form:form action="${saveOrUpdateProduct}" commandName="product"> --%>
+
 							<table class="table table-condensed">
 								<tr>
 									<td colspan="2">Add Directory</td>
@@ -83,7 +84,7 @@
 										</form:label>
 									</td>
 									<td>
-										<form:select path="supplier.name" items="${supplierlist}" itemValue="name" itemLabel="name" />
+										<form:select path="supplier.id" items="${supplierList}" itemValue="id" itemLabel="id" />
 									</td>
 								</tr>
 								<tr>
@@ -93,9 +94,17 @@
 										</form:label>
 									</td>
 									<td>
-										<form:select path="category.name" items="${categorylist}" itemValue="name" itemLabel="name" />
+										<form:select path="category.name" items="${categoryList}" itemValue="name" itemLabel="name" />
 									</td>
 								</tr>
+								<tr>
+									<td><form:hidden path="productImage"/></td>
+								</tr>
+								<tr>
+									<td>Choose Image</td>
+									<td><input type="file" name="file"/></td>
+								</tr>
+								
 								<tr>
 									<td colspan="2">
 										<c:if test="${!empty product.name}">

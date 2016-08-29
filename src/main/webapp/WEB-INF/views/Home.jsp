@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Shopping Cart</title>
+    
 
     <!-- Bootstrap and Font Awesome css -->
     <link href="resources/css/font-awesome.css" rel="stylesheet">
@@ -34,7 +35,8 @@
 
     <div class="navbar navbar-default navbar-fixed-top yamm" role="navigation" id="navbar">
         <div class="container">
-            <div class="navbar-header">
+        	        
+            <!-- <div class="navbar-header">
 
                 <div class="navbar-buttons">
                 
@@ -55,7 +57,7 @@
                     </button>
 
                 </div>
-            </div>
+            </div> -->
             
 
             <div class="navbar-collapse collapse" id="navigation">
@@ -188,7 +190,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="dropdown yamm-fw">
+                   <li class="dropdown yamm-fw">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Template <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
@@ -261,35 +263,39 @@
                     <c:choose>
                     	<c:when test = "${empty loggedUser}">
                     		<li><a href="login">login</a></li>                    
-                    		<li><a href="#">Register</a></li>
+                    		<li><a href="register">Register</a></li>
                     	</c:when>
+                    	
                     	<c:when test="${not empty loggedUser}">
-                    		<li>Welcome!</li>
-                    		<li><a href="#">Logout</a></li>
-                    		<li><a href="#">MyCart</a></li>
+                    		<li><a href="logout">Logout</a></li>
+                    		<li><a href="mycart">MyCart</a></li>
+                    		
+                    			<!-- showing message on navbar after login -->
+
+                    		<li><a style = "text-decoration: none;">Welcome! ${loggedUser}</a></li>                   		
                     	</c:when>
                     </c:choose>
                </ul>
 
             </div>      <!--/.nav-collapse -->
 
-            <div class="navbar-collapse collapse right" id="basket-overview">
+            <!-- <div class="navbar-collapse collapse right" id="basket-overview">
                 <a href="#" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i></a>
-            </div>      /.nav-collapse
+            </div> -->      <!-- /.nav-collapse 
 
             <div class="navbar-collapse collapse right">
                 <button type="button" class="btn navbar-btn btn-default" data-toggle="collapse" data-target="#search">
                     <span class="sr-only">Toggle search</span>
                     <i class="fa fa-search"></i>
                 </button>
-            </div>
+            </div>		
 
             <div class="navbar-collapse collapse right">
                 <button type="button" class="btn navbar-btn btn-default" data-toggle="modal" data-target="#login-modal">
                     <span class="sr-only">User login</span>
                     <i class="fa fa-users"></i>
                 </button>
-            </div>
+            </div>		
 
             <div class="collapse clearfix" id="search">
 
@@ -304,7 +310,7 @@
                     </div>
                 </form>
 
-            </div>      <!--/.nav-collapse -->
+            </div>   -->   <!--/.nav-collapse -->
 
         </div>
 
@@ -381,17 +387,42 @@
 	</div>
 	<div id="loginHere">
 		<c:if test="${userClickedLogin == true || invalidData == true}">
-			<div id="error">
-				${errorMessage}
-			</div>
 			<%@ include file = "login.jsp" %>
 		</c:if>		
 	</div>
 	
+	<div id="registerHere">
+		<c:if test="${userClickedRegister == true}">
+			<%@ include file = "register.jsp" %>
+		</c:if>
+	</div>
 	
+	<!-- ********************************************* Message START ************************************************ -->
 	
+	<div id = "message">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-md-offset-4">
+					<div class="table-responsive">
+						<form:form action="home">
+							<table class="table table-condensed">
+							<c:choose>
+								<c:when test="${addUser}">
+									<li><a style = "text-decoration: none;"> ${registrationMsg} </a></li>
+								</c:when>
+								<c:when test="${loggedOut == true}">
+									<li><a style = "text-decoration: none;">${logoutMessage}</a></li>
+								</c:when>							
+							</c:choose>
+							</table>
+						</form:form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	
-	
+	<!-- ********************************************* Message START ************************************************ -->
 	
 
 <%--     <!-- ********************************************* SLIDER START ************************************************ -->

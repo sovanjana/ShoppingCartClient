@@ -1,17 +1,29 @@
 package com.niit.shoppingcart.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.niit.shoppingcart.dao.ProductDAO;
+import com.niit.shoppingcart.dao.SupplierDAO;
 import com.niit.shoppingcart.model.Product;
+import com.niit.shoppingcart.model.Supplier;
 
 @Controller
 public class ProductController {
@@ -23,6 +35,9 @@ public class ProductController {
 	
 	@Autowired
 	private ProductDAO productDAO;
+	
+	@Autowired
+	SupplierDAO supplierDAO;
 
 	@Autowired
 	public void setProductDAO(ProductDAO productDAO) {
@@ -31,75 +46,128 @@ public class ProductController {
 	/*
 	 * method : listProduct 
 	 * 
-	 * ${listProduct}
+	 * ${productList}
 	 */
 	@RequestMapping(value = "/product", method = RequestMethod.GET)
-	public ModelAndView listProduct(){
+	public String listProduct(Model model){
 		log.debug("listProduct method starts...");
 		
-		ModelAndView mv = new ModelAndView("home");
-		mv.addObject("product", new Product());
-		mv.addObject("listProduct", this.productDAO.list());
+		model.addAttribute("product", new Product());
+		model.addAttribute("productList", this.productDAO.list());
+		
+		/*model.addAttribute("supplierList", supplierDAO.list());*/
 		
 		log.debug("listProduct method ends...");
-		return mv;
+		return "redirect:/adminProduct";
 	}
 	/*
 	 * method : saveOrUpdateProduct 
 	 * 
 	 * ${saveOrUpdateProduct}
 	 */
-	@RequestMapping(value = "/product/saveorupdate", method = RequestMethod.POST)
-	public String saveOrUpdateProduct(@ModelAttribute("product") Product product){
+	/*@RequestMapping(value = "/product/saveorupdate", method = RequestMethod.POST)
+	public String saveOrUpdateProduct(@ModelAttribute("product") Product product, Model model){
 		log.debug("saveOrUpdateProduct method starts...");
 		
-		//ModelAndView mv = new ModelAndView("home");
-		//mv.addObject("saveOrUpdateProduct", productDAO.saveOrUpdate(product));
-			
+		model.addAttribute("addProduct", productDAO.saveOrUpdate(product));
+		
+		
+		log.debug("saveOrUpdateProduct method ends...");
+		return "redirect:/product";
+	}*/
+	/*
+	 */
+	@RequestMapping(value = "/product/saveorupdate", method = RequestMethod.POST)
+	public String saveOrUpdateProduct(@ModelAttribute("product") Product product, HttpServletRequest request, 
+										@RequestParam("file") MultipartFile file){
+		log.debug("saveOrUpdateProduct method starts...");
+		
+		byte fileBytes[];
+		FileOutputStream fos = null;
+		
+		String fileName = "";
+		String productImage = "";
+		ServletContext context = request.getServletContext();
+		String realContextPath = context.getRealPath("/");
+		String un = product.getName();
+		if (file != null){
+			fileName = realContextPath + "/resources/img/" + un + ".jpg";
+			productImage = "/resources/img/" + un + ".jpg";
+			System.out.println("===" + fileName + "===");
+			File fileobj = new File(fileName);
+			System.out.println("xyz");
+			try{
+				fos = new FileOutputStream(fileobj);
+				fileBytes = file.getBytes();
+				fos.write(fileBytes);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		/*model.addAttribute("addProduct", productDAO.saveOrUpdate(product));*/
 		productDAO.saveOrUpdate(product);
 		
 		log.debug("saveOrUpdateProduct method ends...");
-		//return mv;
 		return "redirect:/product";
 	}
+	
+	
 	/*
 	 * method : deleteProduct 
 	 * 
 	 * ${message}
 	 */
 	@RequestMapping("product/delete/{id}")
-	public ModelAndView deleteProduct(@PathVariable("id") String id) throws Exception {
+	public String deleteProduct(@PathVariable("id") String id, ModelMap model) throws Exception {
 		log.debug("deleteProduct method starts...");
 		
-		ModelAndView mv = new ModelAndView("home");
 		try{
 			product = productDAO.get(id);
 			productDAO.delete(product);
-			mv.addObject("message", "Selected Product deleted successfully...");
+			model.addAttribute("message", "Successfully Deleted...");
 		}
 		catch(Exception e){
-			mv.addObject("message", e.getMessage());
+			model.addAttribute("message", e.getMessage());
 			e.printStackTrace();
 		}
 		
 		log.debug("deleteProduct method ends...");
-		return mv;
+		return "redirect:/product";
 	}
-	/*
-	 * method : editProduct 
+	/* 
+	 * 	..........Delete ends...........
 	 * 
-	 * ${isAdminClickedProducts}
+	 *	..........Edit starts...........
+	 * 
+	 * 	method : editProduct 
+	 * 
+	 * 	${isAdminClickedProducts}
+	 * 
 	 */
 	@RequestMapping("product/edit/{id}")
-	public ModelAndView editProduct(@PathVariable("id") String id){
-		log.debug("editProduct method starts...");
+	public String editSelectedProduct(@PathVariable("id") String id, Model model, RedirectAttributes redirectAttributes){
 		
-		ModelAndView mv = new ModelAndView("home");
-		mv.addObject("editProduct", this.productDAO.get(id));
-		mv.addObject("listProduct", this.productDAO.list());
-		mv.addObject("isAdminClickedProducts", "true");
+		redirectAttributes.addFlashAttribute("selectedProduct", productDAO.get(id));
+		redirectAttributes.addFlashAttribute("selectedProductList", productDAO.list());
+		redirectAttributes.addFlashAttribute("isAdminClickedProducts", "true");
 		
-		log.debug("editProduct method ends...");
-		return mv;
+		return "redirect:/editproduct";
 	}
+	/*
+	 *  method : editProduct
+	 *  
+	 *  ${product}
+	 *  ${productList}	
+	 */
+	@RequestMapping(value = "/editproduct", method = RequestMethod.GET)
+	public String editProduct(@ModelAttribute("selectedProduct") final Object selectedProduct, @ModelAttribute("selectedProductList") final Object selectedProductList, Model model){
+		
+		model.addAttribute("product", selectedProduct);
+		model.addAttribute("productList", selectedProductList);
+		return "/home";
+	}
+	/*
+	 *	..........Edit ends...........
+	 */
 }

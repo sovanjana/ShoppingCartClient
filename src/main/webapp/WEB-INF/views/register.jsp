@@ -20,7 +20,7 @@
 				<div class="col-md-4 col-md-offset-4">
 					<div class="table-responsive">
 						<h2>Create an account</h2>
-						<form:form action="user/register" method="post" commandName="userDetails">
+						<form:form action="registration" commandName="userDetails" method="post" enctype="multipart/form-data">
 							<table>
 								<tr>
 									<td>
@@ -69,7 +69,8 @@
 										</form:label>
 									</td>
 									<td>
-										<form:input type="tel" path="mobile" pattern="^(7|8|9)\d{9}$" required="true"	title="Please enter valid mobile number" />
+										<form:input type="tel" path="phone" required="true"/>
+										<%-- <form:input type="tel" path="mobile" pattern="^\d{10}$" required="true"/> --%>
 									</td>
 								</tr>
 								<tr>
@@ -81,13 +82,13 @@
 									<td>
 										<form:input type="email" path="email" />
 									</td>
-								</tr>								
+								</tr>
 								<tr>
 									<td>
-										<input type="submit" value="<spring:message text="Register"/>" />
+										<input type="submit" class="btn btn-info" style="margin: 10px;" value="<spring:message text="create account" />" />
 									</td>
 									<td>
-										<input type="reset" value="<spring:message text="Reset"/>" />
+										<input type="reset" class="btn btn-info" style="margin: 10px;" value="<spring:message text="Reset"/>" />
 									</td>
 								</tr>
 							</table>

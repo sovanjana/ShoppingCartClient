@@ -17,12 +17,13 @@
 </head>
 <body>
 	
-	<c:url var="addSupplier" value="/supplier/saveorupdate"></c:url>
+	
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4 col-md-offset-4">
 				<div class="table-responsive">
 					<h2>Manage Supplier</h2>
+					<c:url var="addSupplier" value="/supplier/saveorupdate"></c:url>
 					<form:form action="${addSupplier}" commandName="supplier">
 						<table class="table table-condensed">
 							<tr>

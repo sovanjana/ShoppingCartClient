@@ -44,14 +44,15 @@ public class AdminController {
 	//  ${productList}
 	
 	@RequestMapping("/adminProduct")
-	public ModelAndView products(){
+	public ModelAndView product(){
 		log.debug("products method starts...");
 		
 		ModelAndView mv = new ModelAndView("home");
 		mv.addObject("product", product);
 		mv.addObject("isAdminClickedProducts", "true");
 		mv.addObject("productList", productDAO.list());
-		
+		mv.addObject("supplierList", supplierDAO.list());
+		System.err.println("Suppliers "+supplierDAO.list());
 		log.debug("products method ends...");
 		return mv;
 	}
@@ -61,7 +62,7 @@ public class AdminController {
 	//  ${supplierList}
 	
 	@RequestMapping("/adminSupplier")
-	public ModelAndView suppliers(){
+	public ModelAndView supplier(){
 		log.debug("suppliers method starts...");
 		
 		ModelAndView mv = new ModelAndView("home");
@@ -69,16 +70,18 @@ public class AdminController {
 		mv.addObject("isAdminClickedSuppliers", "true");
 		mv.addObject("supplierList", supplierDAO.list());
 		
+		
+		
 		log.debug("products method ends...");
 		return mv;
 	}
 	
-	//  ${category}
+	
 	//  ${isAdminClickedCategories}
 	//  ${categoryList}
 	
 	@RequestMapping("/adminCategory")
-	public ModelAndView categories(){
+	public ModelAndView category(){
 		log.debug("categories method starts...");
 		
 		ModelAndView mv = new ModelAndView("home");

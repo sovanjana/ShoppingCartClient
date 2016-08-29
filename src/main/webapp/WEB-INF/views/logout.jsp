@@ -17,34 +17,33 @@
 
 </head>
 <body>
-	<div id="login">
+	<div id="logout">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4 col-md-offset-4">
-				
-					<form:form action="userlogin" method="POST">
-						<table>
-							<tr>
-								<td>User Name : </td>
-								<td><input type="text" name="name"></td>
-							</tr>
-							<tr>
-								<td>Password : </td>
-								<td><input type="password" name="password"></td>
-							</tr>
-							<tr>
-								<td colspan="2"><input type="submit" class="btn btn-info" value="login"></td>
-								
-							</tr>							
-						</table>
-					</form:form><br>
-					${errorMessage}
-					<br>
-					<!-- ${invalidData} -->
+					<div class="col-md-4 col-md-offset-4">
+						
+						<c:url var="logout" value="/userlogout"></c:url>
+						<form:form action="logout" method="GET">
+							<table>
+								<tr>
+									<td><h2>You have successfully logged out...</h2>${logoutMessage}</td>
+								</tr>
+							</table>
+						</form:form>
+					</div>
 				</div>
-			</div>	
+			</div>
 		</div>
 	</div>
+
+
+
+
+
+
+
+
 
 
 
@@ -55,6 +54,6 @@
     <script src="resources/js/bootstrap.min.js"></script>
     <script src="resources/js/jquery.cookie.js"></script>
     <script src="resources/js/front.js"></script>
-    
+
 </body>
 </html>
