@@ -7,11 +7,9 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.niit.shoppingcart.dao.CategoryDAO;
@@ -57,7 +55,10 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView("home");
 		session.setAttribute("category", category);
 		session.setAttribute("categoryList", categoryDAO.list()); 
-				
+		
+		System.out.println(categoryDAO.list());
+		System.out.println("This is home page....");
+		
 		log.debug("onLoad method ends....");
 		return mv;
 	}
@@ -82,7 +83,7 @@ public class HomeController {
 	 *	method : registerHere
 	 *
 	 */
-	@RequestMapping(value = "/register")	//, method = RequestMethod.POST)
+	@RequestMapping(value = "/register")
 	public ModelAndView registerHere(){
 		
 		ModelAndView mv = new ModelAndView("home");
@@ -97,15 +98,19 @@ public class HomeController {
 	 *	method : saveUserDetails
 	 *
 	 *	${addUser}
+	 *	${registrationMsg}
 	 */
 	@RequestMapping(value="/registration", method = RequestMethod.POST)
-	public ModelAndView saveUserDetails(@ModelAttribute("userDetails") UserDetails userDetails, Model model){
+	public ModelAndView saveUserDetails(@ModelAttribute("userDetails") UserDetails userDetails){
 		log.debug("saveUserDetails method startss....");
 		
 		ModelAndView mv = new ModelAndView("home");
 		mv.addObject("userDetails", userDetails);
 		mv.addObject("addUser", userDetailsDAO.save(userDetails));
+		
+		mv.addObject("registeredUser", "true");
 		mv.addObject("registrationMsg", "You have successfully registered...");
+		
 		
 		log.debug("saveUserDetails method ends....");
 		return mv;

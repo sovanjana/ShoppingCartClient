@@ -42,7 +42,7 @@
 									</c:when>
 									<c:otherwise>
 										<td>
-											<form:input path="id" pattern=".{6,7}" required="true" title="id should contains 6-7 characters." />
+											<form:input path="id" pattern=".{6,8}" required="true" title="id should contains 6-8 characters." />
 										</td>
 									</c:otherwise>
 								</c:choose>

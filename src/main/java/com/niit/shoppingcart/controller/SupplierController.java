@@ -58,10 +58,13 @@ public class SupplierController {
 	 */
 	@RequestMapping(value="/supplier/saveorupdate", method = RequestMethod.POST)
 	public String saveOrUpdateSupplier(@ModelAttribute("supplier") Supplier supplier, Model model){
-		log.debug("saveOrUpdateSupplier method startss....");
+		log.debug("saveOrUpdateSupplier method starts....");
 		
 		model.addAttribute("addSupplier", supplierDAO.saveOrUpdate(supplier));
 		
+		model.addAttribute("addedSupplier", "true");
+		model.addAttribute("supAddedMsg", "Supplier added successfully...");
+				
 		log.debug("saveOrUpdateSupplier method ends....");
 		return "redirect:/supplier";
 	}

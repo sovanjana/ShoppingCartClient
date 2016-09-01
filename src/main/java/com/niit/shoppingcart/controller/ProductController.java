@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.niit.shoppingcart.dao.CategoryDAO;
 import com.niit.shoppingcart.dao.ProductDAO;
 import com.niit.shoppingcart.dao.SupplierDAO;
+import com.niit.shoppingcart.model.Category;
 import com.niit.shoppingcart.model.Product;
 import com.niit.shoppingcart.model.Supplier;
 
@@ -39,6 +41,10 @@ public class ProductController {
 	@Autowired
 	SupplierDAO supplierDAO;
 
+	@Autowired
+	CategoryDAO categoryDAO;
+
+	
 	@Autowired
 	public void setProductDAO(ProductDAO productDAO) {
 		this.productDAO = productDAO;
@@ -65,18 +71,6 @@ public class ProductController {
 	 * 
 	 * ${saveOrUpdateProduct}
 	 */
-	/*@RequestMapping(value = "/product/saveorupdate", method = RequestMethod.POST)
-	public String saveOrUpdateProduct(@ModelAttribute("product") Product product, Model model){
-		log.debug("saveOrUpdateProduct method starts...");
-		
-		model.addAttribute("addProduct", productDAO.saveOrUpdate(product));
-		
-		
-		log.debug("saveOrUpdateProduct method ends...");
-		return "redirect:/product";
-	}*/
-	/*
-	 */
 	@RequestMapping(value = "/product/saveorupdate", method = RequestMethod.POST)
 	public String saveOrUpdateProduct(@ModelAttribute("product") Product product, HttpServletRequest request, 
 										@RequestParam("file") MultipartFile file){
@@ -92,10 +86,9 @@ public class ProductController {
 		String un = product.getName();
 		if (file != null){
 			fileName = realContextPath + "/resources/img/" + un + ".jpg";
-			productImage = "/resources/img/" + un + ".jpg";
+			productImage = "resources/img/" + un + ".jpg";
 			System.out.println("===" + fileName + "===");
 			File fileobj = new File(fileName);
-			System.out.println("xyz");
 			try{
 				fos = new FileOutputStream(fileobj);
 				fileBytes = file.getBytes();
@@ -105,14 +98,22 @@ public class ProductController {
 			}
 		}
 		
-		/*model.addAttribute("addProduct", productDAO.saveOrUpdate(product));*/
+		String sid=product.getSupplier().getId();
+		String cid=product.getCategory().getId();
+		
+		product.setProductImage(productImage);		
+		
+		Supplier ss=supplierDAO.get(sid);
+		Category cc=categoryDAO.get(cid);
+		
+		product.setCategory(cc);
+		product.setSupplier(ss);
+		
 		productDAO.saveOrUpdate(product);
 		
 		log.debug("saveOrUpdateProduct method ends...");
 		return "redirect:/product";
-	}
-	
-	
+	}	
 	/*
 	 * method : deleteProduct 
 	 * 

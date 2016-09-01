@@ -64,7 +64,7 @@
 
                 <ul class="nav navbar-nav navbar-left">
                     <li><a href="home">Home</a></li>
-                    <%--<li class="dropdown yamm-fw">
+                    <!-- <li class="dropdown yamm-fw">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Men<b class="caret"></b></a>
                         <ul class="dropdown-menu">
 
@@ -254,12 +254,11 @@
                                             </ul>
                                         </div>
                                     </div>
-                                </div>      <!-- /.yamm-content -->
+                                </div>      /.yamm-content
                             </li>
                         </ul>
-                    </li>--%>
+                    </li> -->
                     <li><a href="#">Contact</a></li>                                    
-                    
                     <c:choose>
                     	<c:when test = "${empty loggedUser}">
                     		<li><a href="login">login</a></li>                    
@@ -268,11 +267,11 @@
                     	
                     	<c:when test="${not empty loggedUser}">
                     		<li><a href="logout">Logout</a></li>
-                    		<li><a href="mycart">MyCart</a></li>
+                    		<li><a href="#">MyCart</a></li>
                     		
                     			<!-- showing message on navbar after login -->
 
-                    		<li><a style = "text-decoration: none;">Welcome! ${loggedUser}</a></li>                   		
+                    		<li><a style = "text-decoration: none;">Welcome!      ${loggedUser}</a></li>                   		
                     	</c:when>
                     </c:choose>
                </ul>
@@ -407,12 +406,12 @@
 						<form:form action="home">
 							<table class="table table-condensed">
 							<c:choose>
-								<c:when test="${addUser}">
-									<li><a style = "text-decoration: none;"> ${registrationMsg} </a></li>
+								<c:when test="${registeredUser == true}">
+									<li><a style = "text-decoration: none;">${registrationMsg}</a></li>
 								</c:when>
-								<c:when test="${loggedOut == true}">
+								<c:when test="${loggedOut}">
 									<li><a style = "text-decoration: none;">${logoutMessage}</a></li>
-								</c:when>							
+								</c:when>
 							</c:choose>
 							</table>
 						</form:form>

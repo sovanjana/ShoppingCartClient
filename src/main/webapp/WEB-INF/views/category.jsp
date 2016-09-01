@@ -118,7 +118,6 @@
 	</div>
 
 
-		<script src="resources/js/jquery.cookie.js"></script>
 	<!--  JAVASCRIPT FILES  -->
 	<script src="resources/js/jquery-1.11.0.min.js"></script>
 	<script src="resources/js/bootstrap.min.js"></script>

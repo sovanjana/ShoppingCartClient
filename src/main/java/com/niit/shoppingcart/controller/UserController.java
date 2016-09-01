@@ -47,8 +47,7 @@ public class UserController {
 	 *
 	 */
 	@RequestMapping("/userlogin")
-	public ModelAndView userLogin(@RequestParam(value = "name") String userID, 
-									@RequestParam(value = "password") String password, HttpSession session) {
+	public ModelAndView userLogin(@RequestParam(value = "name") String userID, @RequestParam(value = "password") String password, HttpSession session) {
 		log.debug("login method starts...");
 
 		ModelAndView mv = new ModelAndView("home");
@@ -66,12 +65,13 @@ public class UserController {
 				mv.addObject("isAdmin", "true");
 				session.setAttribute("supplierList", supplierDAO.list());
 			} else {
-				mv.addObject("isAdmin", "false");				
-				// cart = cartDAO.get(userID);
-				// mv.addObject("cart", cart);
-				// List<Cart> cartList = cartDAO.list();
-				// mv.addObject("cartList", cartList);
-				// mv.addObject("cartSize", cartList.size());
+				mv.addObject("isAdmin", "false");	
+				
+				/* cart = cartDAO.get(userID);
+				 mv.addObject("cart", cart);
+				 List<Cart> cartList = cartDAO.list();
+				 mv.addObject("cartList", cartList);
+				 mv.addObject("cartSize", cartList.size());*/
 			}
 		}
 		else {
@@ -94,11 +94,11 @@ public class UserController {
 
 		ModelAndView mv = new ModelAndView("home");
 		
-		session = request.getSession(true);
 		session.invalidate();
-		
-		//session.setAttribute("category", category);
-		//session.setAttribute("categoryList", categoryDAO.list());
+		session = request.getSession();
+				
+		session.setAttribute("category", category);
+		session.setAttribute("categoryList", categoryDAO.list());
 
 		mv.addObject("loggedOut", "true");
 		mv.addObject("logoutMessage", "successfully logged-out...");

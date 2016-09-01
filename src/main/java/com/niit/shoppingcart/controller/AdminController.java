@@ -38,11 +38,12 @@ public class AdminController {
 	
 	@Autowired
 	SupplierDAO supplierDAO;
-	
-	//  ${product}
-	//  ${isAdminClickedProducts}
-	//  ${productList}
-	
+	/*
+	 *	method : product
+	 * 
+	 *	${isAdminClickedProducts}
+	 *	${productList} 
+	 */
 	@RequestMapping("/adminProduct")
 	public ModelAndView product(){
 		log.debug("products method starts...");
@@ -51,16 +52,16 @@ public class AdminController {
 		mv.addObject("product", product);
 		mv.addObject("isAdminClickedProducts", "true");
 		mv.addObject("productList", productDAO.list());
-		mv.addObject("supplierList", supplierDAO.list());
-		System.err.println("Suppliers "+supplierDAO.list());
+		
 		log.debug("products method ends...");
 		return mv;
 	}
-	
-	//  ${supplier}
-	//  ${isAdminClickedSuppliers}
-	//  ${supplierList}
-	
+	/*
+	 * 	method : supplier
+	 * 
+	 *	${isAdminClickedSuppliers}
+	 *	${supplierList} 
+	 */
 	@RequestMapping("/adminSupplier")
 	public ModelAndView supplier(){
 		log.debug("suppliers method starts...");
@@ -75,11 +76,12 @@ public class AdminController {
 		log.debug("products method ends...");
 		return mv;
 	}
-	
-	
-	//  ${isAdminClickedCategories}
-	//  ${categoryList}
-	
+	/*
+	 * 	method : category
+	 *
+	 *	${isAdminClickedCategories}
+	 *	${categoryList} 
+	 */
 	@RequestMapping("/adminCategory")
 	public ModelAndView category(){
 		log.debug("categories method starts...");

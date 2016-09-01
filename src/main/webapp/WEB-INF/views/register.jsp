@@ -20,7 +20,7 @@
 				<div class="col-md-4 col-md-offset-4">
 					<div class="table-responsive">
 						<h2>Create an account</h2>
-						<form:form action="registration" commandName="userDetails" method="post" enctype="multipart/form-data">
+						<form:form action="registration" commandName="userDetails" method="post">
 							<table>
 								<tr>
 									<td>

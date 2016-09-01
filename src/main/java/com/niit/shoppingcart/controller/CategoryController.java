@@ -53,10 +53,10 @@ Logger log = LoggerFactory.getLogger(CategoryController.class);
 	 *  
 	 */
 	@RequestMapping(value="/category/saveorupdate", method = RequestMethod.POST)
-	public String saveOrUpdateCategory(@ModelAttribute("category") Category category, Model model){
+	public String saveOrUpdateCategory(@ModelAttribute("category") Category category){
 		log.debug("saveOrUpdateCategory method startss....");
 		
-		model.addAttribute("addCategory", categoryDAO.saveOrUpdate(category));
+		categoryDAO.saveOrUpdate(category);
 		
 		log.debug("saveOrUpdateCategory method ends....");
 		return "redirect:/category";

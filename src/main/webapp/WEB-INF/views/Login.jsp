@@ -25,7 +25,7 @@
 					<form:form action="userlogin" method="POST">
 						<table>
 							<tr>
-								<td>User Name : </td>
+								<td>User Name (ID) : </td>
 								<td><input type="text" name="name"></td>
 							</tr>
 							<tr>
