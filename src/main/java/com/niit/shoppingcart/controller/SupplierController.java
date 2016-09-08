@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.niit.shoppingcart.dao.SupplierDAO;
 import com.niit.shoppingcart.model.Supplier;
+import com.niit.shoppingcart.util.Util;
 
 @Controller
 public class SupplierController {
@@ -60,8 +61,10 @@ public class SupplierController {
 	public String saveOrUpdateSupplier(@ModelAttribute("supplier") Supplier supplier, Model model){
 		log.debug("saveOrUpdateSupplier method starts....");
 		
-		model.addAttribute("addSupplier", supplierDAO.saveOrUpdate(supplier));
+		String newID = Util.removeComma(supplier.getId());
+		supplier.setId(newID);
 		
+		model.addAttribute("addSupplier", supplierDAO.saveOrUpdate(supplier));		
 		model.addAttribute("addedSupplier", "true");
 		model.addAttribute("supAddedMsg", "Supplier added successfully...");
 				

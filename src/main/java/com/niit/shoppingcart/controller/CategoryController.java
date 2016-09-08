@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.niit.shoppingcart.dao.CategoryDAO;
 import com.niit.shoppingcart.model.Category;
+import com.niit.shoppingcart.util.Util;
 
 
 @Controller
@@ -53,10 +55,15 @@ Logger log = LoggerFactory.getLogger(CategoryController.class);
 	 *  
 	 */
 	@RequestMapping(value="/category/saveorupdate", method = RequestMethod.POST)
-	public String saveOrUpdateCategory(@ModelAttribute("category") Category category){
+	public String saveOrUpdateCategory(@ModelAttribute("category") Category category, Model model){
 		log.debug("saveOrUpdateCategory method startss....");
 		
-		categoryDAO.saveOrUpdate(category);
+		String newID = Util.removeComma(category.getId());
+		category.setId(newID);
+		
+		model.addAttribute("addCategory", categoryDAO.saveOrUpdate(category));
+		model.addAttribute("addedCategory", "true");
+		model.addAttribute("ctgAddedMsg", "Category added successfully...");
 		
 		log.debug("saveOrUpdateCategory method ends....");
 		return "redirect:/category";

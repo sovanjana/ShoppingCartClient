@@ -61,17 +61,20 @@ public class UserController {
 			session.setAttribute("loggedUser", userDetails.getName());
 			session.setAttribute("loggedUserId", userDetails.getId());
 			
+			//if(userDetails.getRole().equals("ROLE_ADMIN")) {
 			if (userDetails.isAdmin()) {
 				mv.addObject("isAdmin", "true");
 				session.setAttribute("supplierList", supplierDAO.list());
 			} else {
 				mv.addObject("isAdmin", "false");	
 				
-				/* cart = cartDAO.get(userID);
-				 mv.addObject("cart", cart);
-				 List<Cart> cartList = cartDAO.list();
-				 mv.addObject("cartList", cartList);
-				 mv.addObject("cartSize", cartList.size());*/
+			/* 	cart = cartDAO.get(userID);
+				mv.addObject("cart", cart);
+					//Fetch the cart list based on userID...
+				List<Cart> cartList = cartDAO.list();
+				mv.addObject("cartList", cartList);
+				mv.addObject("cartSize", cartList.size());
+			*/
 			}
 		}
 		else {
@@ -96,7 +99,8 @@ public class UserController {
 		
 		session.invalidate();
 		session = request.getSession();
-				
+		//session = request.getSession(true);
+		
 		session.setAttribute("category", category);
 		session.setAttribute("categoryList", categoryDAO.list());
 

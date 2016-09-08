@@ -26,6 +26,7 @@ import com.niit.shoppingcart.dao.SupplierDAO;
 import com.niit.shoppingcart.model.Category;
 import com.niit.shoppingcart.model.Product;
 import com.niit.shoppingcart.model.Supplier;
+import com.niit.shoppingcart.util.Util;
 
 @Controller
 public class ProductController {
@@ -75,6 +76,9 @@ public class ProductController {
 	public String saveOrUpdateProduct(@ModelAttribute("product") Product product, HttpServletRequest request, 
 										@RequestParam("file") MultipartFile file){
 		log.debug("saveOrUpdateProduct method starts...");
+		
+		String newID = Util.removeComma(product.getId());
+		product.setId(newID);
 		
 		byte fileBytes[];
 		FileOutputStream fos = null;

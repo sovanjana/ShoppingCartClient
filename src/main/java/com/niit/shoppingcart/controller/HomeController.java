@@ -13,22 +13,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.niit.shoppingcart.dao.CategoryDAO;
-import com.niit.shoppingcart.dao.ProductDAO;
 import com.niit.shoppingcart.dao.UserDetailsDAO;
 import com.niit.shoppingcart.model.Category;
-import com.niit.shoppingcart.model.Product;
 import com.niit.shoppingcart.model.UserDetails;
+import com.niit.shoppingcart.util.Util;
 
 @Controller
 public class HomeController {
 	
 	Logger log = LoggerFactory.getLogger(HomeController.class);
-	
-	@Autowired
-	Product product;
-	
-	@Autowired
-	ProductDAO productDAO;
 	
 	@Autowired
 	Category category;
@@ -54,7 +47,7 @@ public class HomeController {
 		
 		ModelAndView mv = new ModelAndView("home");
 		session.setAttribute("category", category);
-		session.setAttribute("categoryList", categoryDAO.list()); 
+		session.setAttribute("categoryList", categoryDAO.list());
 		
 		System.out.println(categoryDAO.list());
 		System.out.println("This is home page....");
@@ -102,9 +95,21 @@ public class HomeController {
 	 */
 	@RequestMapping(value="/registration", method = RequestMethod.POST)
 	public ModelAndView saveUserDetails(@ModelAttribute("userDetails") UserDetails userDetails){
-		log.debug("saveUserDetails method startss....");
+		log.debug("saveUserDetails method starts....");
 		
 		ModelAndView mv = new ModelAndView("home");
+		/*	
+		 * 	if(userDetailsDAO.get(userDetails.getID()) == null) {
+		 * 		userDetailsDAO.save(userDetails);
+		 * 		mv.addObject("registrationMsg", "You have successfully registered...");
+		 * 	} else {
+		 * 		mv.addObject("Msg", "user exist with this id...");
+		 * 	}
+		 */
+		
+		String newID = Util.removeComma(userDetails.getId());
+		userDetails.setId(newID);
+		
 		mv.addObject("userDetails", userDetails);
 		mv.addObject("addUser", userDetailsDAO.save(userDetails));
 		

@@ -1,6 +1,6 @@
-body{
+/* body{
 padding-top:100px;
-}
+} */
 body.no-padding{
 padding-top:0;
 }
@@ -64,7 +64,7 @@ color:#c27baa;text-decoration:none;
 margin-bottom:10px;
 }
 .navbar ul.nav>li>a{
-text-transform:uppercase;text-decoration:underline;
+text-transform:uppercase;
 }
 .navbar li.active a{
 text-decoration:none !important;
@@ -80,6 +80,25 @@ font-weight:400;
 .navbar .navbar-buttons{
 float:right;
 }
+
+
+
+
+
+.navbar-nav > li > a {
+	padding-top:5px !important; 
+	padding-bottom:5px !important;
+}
+.navbar {
+	min-height:32px !important
+} 
+ul.dropdown-menu {
+    background-color: #efefef;
+}
+
+
+
+
 .navbar .navbar-buttons button,.navbar .navbar-buttons a.btn,.navbar .navbar-buttons .btn-default.navbar-toggle{
 margin-top:20px;
 margin-bottom:20px;
@@ -125,10 +144,12 @@ width:auto;
 }
 .navbar #basket-overview a{
 margin-left:7px;
+margin-right: 7px;
 }
 .navbar .footer{
-background:#c27baa;
-padding:20px 30px;
+background:goldenrod;
+padding:5px 30px;
+border-radius: 0px 0px 20px 20px;
 }
 .navbar .footer h4{
 font-size:24px;
@@ -450,7 +471,7 @@ list-style:none;
 @media (max-width:767px){
 .navbar-form .form-group{margin-bottom:5px}
 }
-.navbar-btn{margin-top:23px;margin-bottom:23px}
+.navbar-btn{margin-top:7px;margin-bottom:7px}
 .navbar-btn.btn-sm{margin-top:25px;margin-bottom:25px}
 .navbar-btn.btn-xs{margin-top:29px;margin-bottom:29px}
 .navbar-text{margin-top:30px;margin-bottom:30px}
@@ -478,4 +499,8 @@ p{margin:0 0 10px}
 @media (max-width:767px){
 .yamm .yamm-content{padding:10px 20px}
 }
-.yamm .dropdown.yamm-fw .dropdown-menu{left:0;right:0}
+.yamm .dropdown.yamm-fw .dropdown-menu{
+	left:0;
+	right:0;
+	border-radius: 0px 0px 25px 25px;
+}
