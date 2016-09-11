@@ -175,4 +175,32 @@ public class ProductController {
 	/*
 	 *	..........Edit ends...........
 	 */
+	/* ~~~~~~~~~~~~~~~~~~~~~~~single-product-page~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 * 
+	 *	method : getSelectedProduct
+	 *
+	 *	${isUserClickedSingleProduct}
+	 */
+	@RequestMapping(value = "product/get/{id}")
+	public String getSelectedProduct(@PathVariable("id") String id, Model model, RedirectAttributes redirectAttributes) {
+		
+		redirectAttributes.addFlashAttribute("selectedProduct", productDAO.get(id));
+		redirectAttributes.addFlashAttribute("isUserClickedSingleProduct", "true");
+		
+		return "redirect:/singleproduct";
+	}
+	/* ~~~~~~~~~~~~~~~~~~~~~
+	 *	method : backToHome
+	 *
+	 *	${selectedProduct}	
+	 */
+	@RequestMapping(value = "/singleproduct", method = RequestMethod.GET)
+	public String singleProduct(@ModelAttribute("selectedProduct") final Object selectedProduct, Model model) {
+
+		model.addAttribute("product", selectedProduct);
+		//model.addAttribute("categoryList", this.categoryDAO.list());
+
+		return "redirect:/home";
+	}
+	
 }

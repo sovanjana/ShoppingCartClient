@@ -117,14 +117,10 @@
 								<li>
 									<div class="yamm-content">
 										<div class="row">
-											<!-- <div class="col-sm-3">
-												<img src="resources/img/electronics.jpg" class="img-responsive hidden-xs" alt="">
-											</div> -->
 											<div class="col-sm-3">
-												<ul>
-												
-													<c:forEach items="${ctg.products}" var="pro">
-														<li><a href="#">${pro.name}</a></li>
+												<ul>												
+													<c:forEach items="${ctg.products}" var="product">
+														<li><a href="product/get/${product.id}">${product.name}</a></li>
 													</c:forEach>
 												</ul>
 											</div>
@@ -137,7 +133,7 @@
 							</ul>
 						</li>
 					</c:forEach>	
-										
+					</ul>					
 				</div>	
 								
 			</div>	
@@ -148,6 +144,12 @@
 	
 		<!-- ~~~~~~~~~~~~~~~~~~~~ Admin work start ~~~~~~~~~~~~~~~~~~~~ -->
 	
+		
+		
+		
+		
+		
+		<!-- AdminController -->		
 		<div id="admin">
 			<c:if test="${isAdmin == true }">
 				<%@include file="admin.jsp"%>
@@ -169,9 +171,10 @@
 					<%@ include file="admin.jsp"%>
 					<%@ include file="product.jsp"%>
 				</c:if>
-			</div>
-	
+			</div>	
 		</div>
+		
+		
 		<div id="loginHere">
 			<c:if test="${userClickedLogin == true || invalidData == true}">
 				<%@ include file="login.jsp"%>
@@ -181,6 +184,12 @@
 		<div id="registerHere">
 			<c:if test="${userClickedRegister == true}">
 				<%@ include file="register.jsp"%>
+			</c:if>
+		</div>
+		
+		<div id="singleProduct">
+			<c:if test="${isUserClickedSingleProduct == true}">
+				<%@ include file="singleproduct.jsp"%>
 			</c:if>
 		</div>
 		
@@ -218,8 +227,7 @@
 		</div>
 	
 		<!-- ********************************************* Message START ************************************************ -->
-	
-	
+		
 		<!-- ************************************************ SLIDER *************************************************** -->
 	
 	
@@ -256,20 +264,9 @@
 		<!-- /#slider -->
 	
 		<!-- ********************************************* SLIDER END ************************************************** -->
-	
+
 		<div id="all">
-	
-			<!-- *********************************************** CATEGORY ************************************************ -->
-	
-			<div id="category">
-				<div class="container">
-					<div class="col-md-4"></div>
-					<div class="col-md-8 col-md-offset-4"></div>
-				</div>
-			</div>
-	
-			<!-- ********************************************* CATEGORY END ********************************************** -->
-	
+
 			<!-- *********************************************** ADVANTAGES ************************************************ -->
 	
 			<div id="advantages">	
@@ -338,6 +335,8 @@
 	
 			<!-- ********************************************** ADVANTAGES END **************************************************** -->
 	
+	
+
 			<!-- ************************************************** FOOTER ******************************************************** -->
 	
 			<div id="footer">	
@@ -360,19 +359,12 @@
 					</div>	
 					<div class="col-md-3 col-sm-6">	
 						<h4>Top categories</h4>
-						<h5>Men</h5>
-						<ul>
-							<li><a href="#">T-shirts</a></li>
-							<li><a href="#">Shirts</a></li>
-							<li><a href="#">Accessories</a></li>
-						</ul>
-						<h5>Women</h5>
-						<ul>
-							<li><a href="#">T-shirts</a></li>
-							<li><a href="#">Skirts</a></li>
-							<li><a href="#">Pants</a></li>
-							<li><a href="#">Accessories</a></li>
-						</ul>
+						
+						<c:forEach items="${categoryList}" var="ctg">
+							<ul>
+								<li><a href="#">${ctg.name}</a></li>
+							</ul>
+						</c:forEach>												
 						<hr class="hidden-md hidden-lg">	
 					</div>	
 					<div class="col-md-3 col-sm-6">	
@@ -381,7 +373,7 @@
 							<strong>NIIT</strong> <br>
 							Raja S.C.Mullick Road <br>
 							Garia<br>
-							Kolkata-84 <br>
+							Kolkata-47 <br>
 							West Bengal <br> 
 							<strong>India</strong>
 						</p>
@@ -403,10 +395,10 @@
 						<hr>
 						<h4>Stay in touch</h4>
 						<p class="social">
-							<a href="#"><i class="fa fa-facebook-square"></i></a> 
+							<a href="#"><i class="fa fa-facebook"></i></a> 
 							<a href="#"><i class="fa fa-instagram"></i></a> 
 							<a href="#"><i class="fa fa-google-plus"></i></a> 
-							<a href="#"><i class="fa fa-envelope"></i></a>
+							<a href="#"><i class="fa fa-twitter"></i></a>
 						</p>	
 					</div>
 					<!-- /.col-md-3 -->	
@@ -423,7 +415,7 @@
 				<div class="container">	
 					<div class="col-md-12">	
 						<p class="pull-left">
-							&copy; 2016.<a href="index.html"><strong>Shopping Cart - </strong></a>Copyright by <strong>NIIT Ltd.</strong></a>
+							&copy; 2016.<a href="#"><strong>Shopping Cart - </strong></a>Copyright by <strong>NIIT Ltd.</strong>
 						</p>	
 					</div>
 					<!-- /.col-md-12 -->	
