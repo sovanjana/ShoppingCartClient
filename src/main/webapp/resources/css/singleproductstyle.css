@@ -1,44 +1,4 @@
-﻿/*-----------------------------------------------------------------------------------
-
-    Template Name: Maahi Shop - Multipurpose eCOMMERCE Template 
-    Template URI: http://urwebsites.com/maahi-shop/
-    Description: This is html5 template
-    Author: Mega Theme
-    Author URI: https://themeforest.net/user/mega_theme
-    Version: 1.0
-
------------------------------------------------------------------------------------
-    
-    CSS INDEX
-    ===================
-	
-    1. Theme Default CSS (body, link color, section etc)
-	2. header-top-area
-	3. header-bottom-area
-	4. main-menu-area 
-	5. banner-area
-	6. features-area 
-	7. category-area 
-	8. subscribe-area 
-	9. service-area 
-	10. latest-blog-area 
-	11. brand-area
-	12. footer
-	13. home 2
-	14. home 3
-	15. contact-area
-	16. shop-header-area
-	17 shop-area
-	18. single product
-	19. product-tabs
-	20. cart page
-	21. checkout page
-	22. wishlist-area
-	23. my-account-area
-	24. blog-area	
-
------------------------------------------------------------------------------------*/
-
+﻿
 /*----------------------------------------*/
 /*  1.  Theme default CSS
 /*----------------------------------------*/
@@ -889,7 +849,7 @@ img.secondary-img {
   background: #222 none repeat scroll 0 0;
   color: #fff;
   display: inline-block;
-  font-size: 15px;
+  font-size: 30px;
   height: 35px;
   line-height: 35px;
   margin: 0 5px;

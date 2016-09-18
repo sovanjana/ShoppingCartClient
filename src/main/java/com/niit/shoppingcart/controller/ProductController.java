@@ -200,7 +200,7 @@ public class ProductController {
 		model.addAttribute("product", selectedProduct);
 		//model.addAttribute("categoryList", this.categoryDAO.list());
 
-		return "redirect:/home";
+		return "/home";
 	}
 	
 }

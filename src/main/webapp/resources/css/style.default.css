@@ -1,6 +1,100 @@
-/* body{
-padding-top:100px;
-} */
+/* registration and login page start */
+html, body {height: 100%;}
+.floatleft {float:left}
+.floatright {float:right}
+.k-padding{
+  padding:30px 0;
+}
+.k-padding-top-4 {
+  padding-top: 40px;
+}
+.kp-button{
+  	text-align: left;
+    padding: 10px 25px;
+    font-weight: 700;
+    color: #222;
+    border: 2px solid cadetblue;
+    text-transform: uppercase;
+    height: 40px;
+    display: inline-block;
+    border-radius: 5px;
+    outline: none;
+    background-color: #fff;
+    line-height: 19px;
+    transition: .3s;
+}
+.kp-button:hover{
+  background-color: gold;
+  color: #fff;
+  text-decoration: none;
+}
+.kp-button-2{
+  background: #ef6644;
+  color: #fff;
+}
+.kp-button-2:hover{
+    background-color: #fff;
+    color: #ef6644;
+}
+.contact-info {
+  display: inline-block;
+  margin: auto;
+  text-align: center;
+}
+.contact-us-form .single-input.one-half:nth-child(1){
+  padding-right: 15px;
+}
+.contact-us-area .form-inner .single-input {
+  margin-bottom:20px;
+}
+.one-half {
+  float: left;
+  width: 50%;
+  padding: 5px;
+}
+.contact-us-area .form-inner .single-input label {
+  color: #333;
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 15px;
+  margin-bottom: 10px;
+}
+.contact-us-area .form-inner .single-input label span{
+  color: #ff0000;
+  display: inline-block;
+  margin-left: 5px;
+}
+.contact-us-area .form-inner input[type="text"] {
+  background: #ffffff none repeat scroll 0 0;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 15px;
+  width: 100%;
+}
+.contact-us-area .form-inner input[type="password"] {
+  background: #ffffff none repeat scroll 0 0;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 15px;
+  width: 100%;
+  
+}
+.contact-us-area .form-inner label {
+  background: rgb(236, 236, 236) none repeat scroll 0 0;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 15px;
+  width: 100%;
+}
+/* registration and login page end */
+
 body.no-padding{
 padding-top:0;
 }

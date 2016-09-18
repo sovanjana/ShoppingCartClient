@@ -58,7 +58,7 @@ public class SupplierController {
 	 *  
 	 */
 	@RequestMapping(value="/supplier/saveorupdate", method = RequestMethod.POST)
-	public String saveOrUpdateSupplier(@ModelAttribute("supplier") Supplier supplier, Model model){
+	public String saveOrUpdateSupplier(@ModelAttribute("supplier") Supplier supplier, Model model) {
 		log.debug("saveOrUpdateSupplier method starts....");
 		
 		String newID = Util.removeComma(supplier.getId());
@@ -67,7 +67,7 @@ public class SupplierController {
 		model.addAttribute("addSupplier", supplierDAO.saveOrUpdate(supplier));		
 		model.addAttribute("addedSupplier", "true");
 		model.addAttribute("supAddedMsg", "Supplier added successfully...");
-				
+		
 		log.debug("saveOrUpdateSupplier method ends....");
 		return "redirect:/supplier";
 	}
@@ -93,8 +93,7 @@ public class SupplierController {
 			model.addAttribute("message", e.getMessage());
 			e.printStackTrace();
 		}
-		//redirectAttrs.addFlashAttribute(arg0,arg1)
-		
+				
 		log.debug("deleteSupplier method ends....");
 		return "redirect:/supplier";
 	}

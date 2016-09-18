@@ -31,48 +31,30 @@
 </head>
 
 <body>
-
-
-	<div id="login">
-		<div class="container">
-			<div class="contact-us-area k-padding">
-				<div class="row">
-					<div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-						<fieldset>
-							<legend>Login</legend>
-							<div class="form-inner">
-								<form:form action="userlogin" method="POST">
-									<div class="one-half">
-										<input type="text" name="name" required="true"
-											placeholder="UserID">
-									</div>
-									<div class="one-half">
-										<input type="password" name="password" required="true"
-											placeholder="Password" />
-									</div>
-									<div>
-										<input type="submit" class="btn btn-info kp-button floatright"
-											value="login">
-									</div>
-								</form:form>
+	<div class="container">
+		<div class="contact-us-area k-padding">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
+					<fieldset>
+						<legend>Welcome  <a style="text-decoration:none;"> ${userDetails.name} !!</a></legend>
+					
+						<div class="form-inner">
+							<div class="reg-button k-padding-top-4">
+								<a href="login" class="kp-button floatright">Login</a>
+									
+								<a href="home" class="kp-button floatleft" >Home</a>
 							</div>
-						</fieldset>
-						<br> ${errorMessage} <br>
-					</div>
+						</div>
+					</fieldset>
 				</div>
 			</div>
 		</div>
 	</div>
-
-
-
-
 
 	<!--  JAVASCRIPT FILES  -->
 	<script src="resources/js/jquery-1.11.0.min.js"></script>
 	<script src="resources/js/bootstrap.min.js"></script>
 	<script src="resources/js/jquery.cookie.js"></script>
 	<script src="resources/js/front.js"></script>
-
 </body>
 </html>

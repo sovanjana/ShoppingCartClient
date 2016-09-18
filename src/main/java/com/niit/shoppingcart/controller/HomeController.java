@@ -39,9 +39,8 @@ public class HomeController {
 	@Autowired
 	UserDetailsDAO userDetailsDAO;
 	
-	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~YY~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	 *	method : onLoad
-	 *
+	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~onLoad~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *	
 	 *	${category}
 	 *	${categoryList}	
 	 */
@@ -53,7 +52,6 @@ public class HomeController {
 		session.setAttribute("category", category);
 		session.setAttribute("categoryList", categoryDAO.list());
 				
-		System.out.println(categoryDAO.list());
 		System.out.println("This is home page....");
 		
 		log.debug("onLoad method ends....");
@@ -61,8 +59,7 @@ public class HomeController {
 	}
 		
 	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~login~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	 *	method : login
-	 *
+	 *	
 	 *	${userClickedLogin}	
 	 */
 	@RequestMapping("/login")
@@ -76,8 +73,7 @@ public class HomeController {
 		log.debug("login method ends...");
 		return mv;
 	}		
-	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	 *	method : registerHere
+	/* ~~~~~~~~~~~~~~~~~~~~~~~~registerHere~~~~~~~~~~~~~~~~~~~~~~~~~~
 	 *
 	 *	${userClickedRegister}
 	 *
@@ -88,14 +84,12 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView("home");
 		mv.addObject("userDetails", userDetails);
 		mv.addObject("userClickedRegister", "true");
-		//mv.addObject("userList", userDetailsDAO.list());
 		
 		return mv;
 	}
 	
-	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	 *	method : saveUserDetails
-	 *
+	/* ~~~~~~~~~~~~~~~~~~~~saveUserDetails~~~~~~~~~~~~~~~~~~~~~
+	 *	
 	 *	${addUser}
 	 *	${registrationMsg}
 	 */
@@ -113,8 +107,12 @@ public class HomeController {
 		 * 	}
 		 */
 		
+		/* add new id without a comma problem, manually remove comma and insert into database  */
 		String newID = Util.removeComma(userDetails.getId());
 		userDetails.setId(newID);
+		
+		userDetails.setEnabled(true);
+		userDetails.setRole("ROLE_USER");
 		
 		mv.addObject("userDetails", userDetails);
 		mv.addObject("addUser", userDetailsDAO.save(userDetails));
