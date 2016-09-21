@@ -32,7 +32,8 @@
 	
 	<div class="container">
 		<div class="row">
-			<div class="col-md-4 col-md-offset-4">
+			<!-- <div class="col-md-4 col-md-offset-4"> -->
+			<div class="col-md-6 col-md-offset-3">
 				<div class="table-responsive">
 					<h2>Manage Category</h2>
 					<c:url var="addCategory" value="/category/saveorupdate"></c:url>
@@ -69,6 +70,9 @@
 								<td>
 									<form:input path="name" required="true" />
 								</td>
+								<td>
+									<form:errors path="name" cssClass="error"/>
+								</td>								
 							</tr>
 							<tr>
 								<td>
@@ -78,6 +82,7 @@
 								</td>
 								<td>
 									<form:input path="description" required="true" />
+									<form:errors path="description" cssClass="error"/>
 								</td>
 							</tr>
 							<tr>
@@ -96,7 +101,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-8 col-md-offset-2">
+			<div class="col-md-12">
 				<div class="table-responsive">
 					<h2>Category List</h2>
 					<c:if test="${!empty categoryList}">

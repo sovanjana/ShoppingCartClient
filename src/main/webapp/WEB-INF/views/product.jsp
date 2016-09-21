@@ -52,7 +52,7 @@
 										</c:when>
 										<c:otherwise>
 											<td>
-												<form:input path="id" pattern=".{6,7}" required="true" title="id should contains 6-7 characters." />
+												<form:input path="id" pattern=".{6,10}" required="true" title="id should contains 6-10 characters." />
 											</td>
 										</c:otherwise>
 									</c:choose>
@@ -133,7 +133,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-8 col-md-offset-2">
+				<div class="col-md-12">
 					<div class="table-responsive">
 						<h2>Product List</h2>
 						<c:if test="${!empty productList}">
@@ -156,7 +156,7 @@
 										<td>${product.price}</td>
 										<td>${product.category.name}</td>
 										<td>${product.supplier.name}</td>
-										<td><img src="${product.productImage}" style="width : 60px"/></td>
+										<td><img src="${pageContext.request.contextPath}/${product.productImage}" style="width : 60px"/></td>
 										<%-- <td>
 											<a href="<c:url value='product/edit/${product.id}'/>" class="btn btn-info" role="button">Edit</a>
 										</td> --%>

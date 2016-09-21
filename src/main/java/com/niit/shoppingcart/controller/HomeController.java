@@ -14,8 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.niit.shoppingcart.dao.CategoryDAO;
 import com.niit.shoppingcart.dao.ProductDAO;
+import com.niit.shoppingcart.dao.SupplierDAO;
 import com.niit.shoppingcart.dao.UserDetailsDAO;
 import com.niit.shoppingcart.model.Category;
+import com.niit.shoppingcart.model.Supplier;
 import com.niit.shoppingcart.model.UserDetails;
 import com.niit.shoppingcart.util.Util;
 
@@ -29,6 +31,12 @@ public class HomeController {
 	
 	@Autowired
 	CategoryDAO categoryDAO;
+	
+	@Autowired
+	Supplier supplier;
+	
+	@Autowired
+	SupplierDAO supplierDAO;
 	
 	@Autowired
 	ProductDAO productDAO;
@@ -50,7 +58,9 @@ public class HomeController {
 		
 		ModelAndView mv = new ModelAndView("home");
 		session.setAttribute("category", category);
+		System.out.println("reached home...");
 		session.setAttribute("categoryList", categoryDAO.list());
+		session.setAttribute("supplierList", supplierDAO.list());
 				
 		System.out.println("This is home page....");
 		
@@ -73,6 +83,16 @@ public class HomeController {
 		log.debug("login method ends...");
 		return mv;
 	}		
+	/* ~~~~~~~~~~~~~~~~~~~~~~~~403~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *
+	 */
+	@RequestMapping("/403")
+	public ModelAndView denied() {
+		ModelAndView mv = new ModelAndView("403");
+		return mv;
+	}
+	
+	
 	/* ~~~~~~~~~~~~~~~~~~~~~~~~registerHere~~~~~~~~~~~~~~~~~~~~~~~~~~
 	 *
 	 *	${userClickedRegister}

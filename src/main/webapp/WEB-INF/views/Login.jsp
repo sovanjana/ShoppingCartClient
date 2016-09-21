@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -32,8 +33,8 @@
 
 <body>
 
-
-	<div id="login">
+<%-- 
+		<div id="login">
 		<div class="container">
 			<div class="contact-us-area k-padding">
 				<div class="row">
@@ -54,6 +55,39 @@
 										<input type="submit" class="btn btn-info kp-button floatright"
 											value="login">
 									</div>
+								</form:form>
+							</div>
+						</fieldset>
+						<br> ${errorMessage} <br>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	 --%>
+	<div id="login">
+		<div class="container">
+			<div class="contact-us-area k-padding">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
+						<fieldset>
+							<legend>Login</legend>
+							<div class="form-inner">
+								<form:form name="login" action="${pageContext.request.contextPath}/j_spring_security_check" method="POST">
+									<div class="one-half">
+										<input type="text" name="username" required="true"
+											placeholder="UserID">
+									</div>
+									<div class="one-half">
+										<input type="password" name="password" required="true"
+											placeholder="Password" />
+									</div>
+									<div>
+										<input type="submit" name="submit" class="btn btn-info kp-button floatright"
+											value="login">
+									</div>
+									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 								</form:form>
 							</div>
 						</fieldset>

@@ -36,7 +36,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <ul class="breadcrumb">
-                        <li><a href="home">Home</a></li>
+                        <li><a href="/ShoppingCartClient/">Home</a></li>
                         <li class="active">Product Details</li>
                     </ul>
                 </div>
@@ -52,7 +52,7 @@
                             <div class="single-pro-tab-content">
                                 <div class="tab-content">
                                     <div role="tabpanel" class="tab-pane active" id="home">
-                                        <a href="#"><img src="${product.productImage}" alt="" /></a>
+                                        <a href="#"><img src="${pageContext.request.contextPath}/${product.productImage}" alt="" /></a>
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                                         <a href="#">Buy Now</a>
                                     </div>
                                     <div class="pro-button-bottom">
-                                        <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                                        <a href="user/cart/addToCart/${product.id}"><i class="fa fa-shopping-cart"></i></a>
                                     </div>
                                 </div>
                                 <hr class="page-divider small">

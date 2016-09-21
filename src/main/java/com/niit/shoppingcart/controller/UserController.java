@@ -46,44 +46,44 @@ public class UserController {
 	 *	${loggedUserId}
 	 *
 	 */
-	@RequestMapping("/userlogin")
+	/*@RequestMapping("/userlogin")
 	public ModelAndView userLogin(@RequestParam(value = "name") String userID, @RequestParam(value = "password") String password, HttpSession session) {
 		log.debug("login method starts...");
 
 		ModelAndView mv = new ModelAndView("home");
-		boolean isValidUser = userDetailsDAO.isValidUser(userID, password);
+		//boolean isValidUser = userDetailsDAO.isValidUser(userID, password);
 
-		log.debug("isValidUser running..." + isValidUser);
+		//log.debug("isValidUser running..." + isValidUser);
 
-		if (isValidUser == true) {
+		//if (isValidUser == true) {
 			userDetails = userDetailsDAO.get(userID);
 			
-			session.setAttribute("loggedUser", userDetails.getName());
-			session.setAttribute("loggedUserId", userDetails.getId());
+			//session.setAttribute("loggedUser", userDetails.getName());
+			//session.setAttribute("loggedUserId", userDetails.getId());
 			
 			//if(userDetails.getRole().equals("ROLE_ADMIN")) {
-			if (userDetails.isAdmin()) {
+			if (userDetails.getRole().compareTo("ROLE_ADMIN") == 0) {
 				mv.addObject("isAdmin", "true");
 				session.setAttribute("supplierList", supplierDAO.list());
 			} else {
 				mv.addObject("isAdmin", "false");	
 				
-			/* 	cart = cartDAO.get(userID);
+			 	cart = cartDAO.get(userID);
 				mv.addObject("cart", cart);
 					//Fetch the cart list based on userID...
 				List<Cart> cartList = cartDAO.list();
 				mv.addObject("cartList", cartList);
 				mv.addObject("cartSize", cartList.size());
-			*/
+			
 			}
 		}
-		else {
-			mv.addObject("invalidData", "true");
-			mv.addObject("errorMessage", "Invalid Input...");			
-		}
-		log.debug("login method ends...");
-		return mv;
-	}
+	//	else {
+	//		mv.addObject("invalidData", "true");
+		//	mv.addObject("errorMessage", "Invalid Input...");			
+		//}
+		//log.debug("login method ends...");
+		//return mv;
+	}*/
 	/*
 	 * method : logout
 	 * 

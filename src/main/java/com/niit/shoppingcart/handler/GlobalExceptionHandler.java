@@ -71,7 +71,7 @@ public class GlobalExceptionHandler {
 		log.error("RuntimeException Occured:: Exception="+e.getMessage());
 		
 		ModelAndView mv = new ModelAndView("exception");
-		mv.addObject("error", e.getMessage());
+		mv.addObject("error", e.getStackTrace());
 		
 		mv.addObject("exception", e);
 		return mv;
@@ -83,8 +83,8 @@ public class GlobalExceptionHandler {
 		log.error("Unknown exception occurred:: Exception="+e.getMessage());
 		
 		ModelAndView mv = new ModelAndView("exception");
-		mv.addObject("error", e.getMessage());
-		
+		mv.addObject("error", e.getStackTrace());
+	
 		return mv;
 	}
 }

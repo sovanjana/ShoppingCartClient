@@ -33,7 +33,7 @@
 		<div class=row>
 			<div class="col-md-4 col-md-offset-4">
 				<div class="content" style="width:60%">
-					<a href="/ShoppingCartClient/" style="color:blue; text-align: justify;">Home</a>
+					<a href="home" style="color:blue; text-align: justify;">Home</a>
 					<fieldset>
 						<legend style="color:red;">Error occurred</legend>
 						${exception }

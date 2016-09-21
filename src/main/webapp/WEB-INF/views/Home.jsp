@@ -3,6 +3,9 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="security"%>
+<%@ page isELIgnored="false"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -11,6 +14,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Shopping Cart</title>
+
+<!-- Bootstrap, Font Awesome and jQuery css -->
+<!-- <link href="admin/resources/css/font-awesome.css" rel="stylesheet">
+<link href="admin/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="admin/resources/css/jquery-ui.min.css" rel="stylesheet">
+ -->
 
 <!-- Bootstrap, Font Awesome and jQuery css -->
 <link href="resources/css/font-awesome.css" rel="stylesheet">
@@ -34,46 +43,61 @@
 
 <body>
 	<!-- ****************************************** TOP HEADER START ************************************************** -->
-	<!-- Fixed navbar -->
-	<nav class="navbar navbar-default navbar-fixed-top"
-		style="background-color: gold;">
+	<c:url value="springFlow" var="signup" />
+
+	<nav class="navbar navbar-default navbar-fixed-top"	style="background-color: gold;">
 	<div class="container">
+
 		<div class="navbar-header">
-			<a class="btn btn-primary navbar-toggle" href="#cart"> <i
-				class="fa fa-shopping-cart"></i> <span class="hidden-xs"></span>
+			<a class="btn btn-primary navbar-toggle" href="user/cart"> 
+				<i class="fa fa-shopping-cart"></i> 
+				<span class="hidden-xs"></span>
 			</a>
-			<button type="button" class="navbar-toggle btn-default"
-				data-toggle="collapse" data-target="#search">
+			<button type="button" class="navbar-toggle btn-default"	data-toggle="collapse" data-target="#search">
 				<span class="sr-only">Toggle search</span> <i class="fa fa-search"></i>
 			</button>
-			<button type="button" class="navbar-toggle btn-default"
-				data-toggle="collapse" data-target="#logout">
+			<button type="button" class="navbar-toggle btn-default" data-toggle="collapse" data-target="#logout">
 				<span class="sr-only">Logout</span> <i class="fa fa-users"></i>
 			</button>
 		</div>
-		<div id="navbar" class="navbar-collapse collapse"
-			style="float: right; padding-top: 5px;">
+
+		<div id="navbar" class="navbar-collapse collapse" style="float: right;">
 			<ul class="nav navbar-nav navbar-right">
-				<c:choose>
-					<c:when test="${empty loggedUser}">
-						<li><a href="login">login</a></li>
-						<li><a href="springFlow">Signup</a></li>
-					</c:when>
-					<c:when test="${not empty loggedUser}">
-						<li><a href="logout">Logout</a></li>
-						<li><a href="#">MyCart</a></li>
-						<!-- showing message on navbar after login -->
-						<li><a style="text-decoration: none;">Welcome!
-								${loggedUser}</a></li>
-					</c:when>
-				</c:choose>
+				<c:if test="${pageContext.request.userPrincipal.name != null}">
+					<li><a>Welcome! ${pageContext.request.userPrincipal.name}</a></li>
+				</c:if>			
+				
+				<c:if test="${pageContext.request.userPrincipal.name == null}">
+					<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+				</c:if>
+								
+				<security:authorize access="hasRole('ROLE_USER')">
+					<!-- <li><a href="user/cart/">View Cart</a></li> -->
+				</security:authorize>
+
+				<security:authorize access="hasRole('ROLE_ADMIN')">
+					<li><a href="admin/adminCategory">Category</a></li>
+					<li><a href="admin/adminSupplier">Supplier</a></li>
+					<li><a href="admin/adminProduct">Product</a></li>
+				</security:authorize>
+				
+				<c:if test="${pageContext.request.userPrincipal.name != null}">
+					<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
+				</c:if>
+				
+				<c:if test="${pageContext.request.userPrincipal.name == null}">
+					<li><a href="${signup}">Sign Up</a></li>
+				</c:if>
+						
 			</ul>
+			
+
 		</div>
 		<div class="navbar-collapse collapse left" id="basket-overview">
-			<a href="#" class="btn btn-primary navbar-btn"><i
-				class="fa fa-shopping-cart"></i></a>
+			<a href="user/cart/" class="btn btn-primary navbar-btn"> <i
+				class="fa fa-shopping-cart"></i>
+			</a>
 		</div>
-		<!-- /.nav-collapse -->
 		<div class="navbar-collapse collapse left">
 			<button type="button" class="btn navbar-btn btn-default"
 				data-toggle="collapse" data-target="#search">
@@ -92,7 +116,7 @@
 				</div>
 			</form>
 		</div>
-		<!--/.nav-collapse -->
+
 	</div>
 	</nav>
 
@@ -118,7 +142,7 @@
 
 			<div class="navbar-collapse collapse" id="navigation">
 				<ul class="nav navbar-nav navbar-left">
-					<li><a href="home">Home</a></li>
+					<li><a href="/ShoppingCartClient/home">Home</a></li>
 
 					<!-- category list fetching on navbar -->
 					<c:forEach items="${categoryList}" var="ctg">
