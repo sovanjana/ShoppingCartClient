@@ -98,10 +98,10 @@
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
 				<div class="table-responsive">
-					<h2>Supplier List</h2>
+					<h2 style="text-align: center;background-color: gold;">Supplier List</h2>
 					<c:if test="${!empty supplierList}">
 						<table class="table table-condensed">
-							<tr>
+							<tr style="background-color: #e6e6ff;">
 								<th width="80">Supplier ID</th>
 								<th width="120">Supplier Name</th>
 								<th width="120">Supplier Address</th>
@@ -117,7 +117,8 @@
 										<a href="<c:url value='supplier/edit/${supplier.id}'/>" class="btn btn-info" role="button">Edit</a>
 									</td>
 									<td>
-										<a href="<c:url value='supplier/delete/${supplier.id}'/>" class="btn btn-info" role="button">Delete</a>
+										<a href="<c:url value='supplier/delete/${supplier.id}'/>" class="btn btn-danger" role="button"><span
+												class="fa fa-remove"></span>  Delete</a>
 									</td>
 								</tr>
 							</c:forEach>

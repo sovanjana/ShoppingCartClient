@@ -103,10 +103,10 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="table-responsive">
-					<h2>Category List</h2>
+					<h2 style="text-align: center;background-color: gold;">Category List</h2>
 					<c:if test="${!empty categoryList}">
 						<table class="table table-condensed">
-							<tr>
+							<tr style="background-color: #e6e6ff;">
 								<th width="80">Category ID</th>
 								<th width="120">Category Name</th>
 								<th width="120">Category Description</th>
@@ -122,7 +122,8 @@
 										<a href="<c:url value='category/edit/${category.id}'/>" class="btn btn-info" role="button">Edit</a>
 									</td>
 									<td>
-										<a href="<c:url value='category/delete/${category.id}'/>" class="btn btn-info" role="button">Delete</a>
+										<a href="<c:url value='category/delete/${category.id}'/>" class="btn btn-danger" role="button"><span
+												class="fa fa-remove"></span>  Delete</a>
 									</td>
 								</tr>
 							</c:forEach>

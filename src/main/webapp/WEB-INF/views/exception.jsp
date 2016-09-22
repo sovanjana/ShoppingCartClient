@@ -35,7 +35,7 @@
 				<div class="content" style="width:60%">
 					<a href="home" style="color:blue; text-align: justify;">Home</a>
 					<fieldset>
-						<legend style="color:red;">Error occurred</legend>
+						<legend style="color:red;">~~~~~~~~  Error occurred  ~~~~~~~~</legend>
 						${exception }
 					</fieldset>
 				</div>

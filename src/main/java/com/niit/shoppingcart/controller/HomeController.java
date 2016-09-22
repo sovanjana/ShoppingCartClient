@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.niit.shoppingcart.dao.CartDAO;
 import com.niit.shoppingcart.dao.CategoryDAO;
 import com.niit.shoppingcart.dao.ProductDAO;
 import com.niit.shoppingcart.dao.SupplierDAO;
@@ -27,14 +29,12 @@ public class HomeController {
 	Logger log = LoggerFactory.getLogger(HomeController.class);
 	
 	@Autowired
-	Category category;
-	
+	Category category;	
 	@Autowired
 	CategoryDAO categoryDAO;
 	
 	@Autowired
-	Supplier supplier;
-	
+	Supplier supplier;	
 	@Autowired
 	SupplierDAO supplierDAO;
 	
@@ -43,9 +43,11 @@ public class HomeController {
 	
 	@Autowired
 	UserDetails userDetails;
-
 	@Autowired
 	UserDetailsDAO userDetailsDAO;
+	
+	@Autowired
+	CartDAO cartDAO;
 	
 	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~onLoad~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	 *	
@@ -144,4 +146,14 @@ public class HomeController {
 		log.debug("saveUserDetails method ends....");
 		return mv;
 	}
+	
+	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ returnCountProducts ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	/*public int returnCountProducts(String userId, RedirectAttributes redirectAttributes) {
+		if (userId != null) {
+			int countProduct = cartDAO.getCartByUserId(userId).getCountProducts();
+			redirectAttributes.addFlashAttribute("countProducts", countProduct);
+			return  countProduct;
+		}
+		return 0;
+	}*/
 }

@@ -14,6 +14,8 @@ public class CartItemModel implements Serializable {
 	private CartItem cartItem;
 	
 	private String productName;
+	
+	private String productImage;
 
 	public CartItemModel() {
 	}
@@ -27,6 +29,14 @@ public class CartItemModel implements Serializable {
 	
 	public CartItem getCartItem() {
 		return cartItem;
+	}
+
+	public String getProductImage() {
+		return productImage;
+	}
+
+	public void setProductImage(String productImage) {
+		this.productImage = productImage;
 	}
 
 	public void setCartItem(CartItem cartItem) {

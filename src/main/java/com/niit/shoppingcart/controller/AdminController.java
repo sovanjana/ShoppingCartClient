@@ -48,7 +48,7 @@ public class AdminController {
 	public ModelAndView product(){
 		log.debug("products method starts...");
 		
-		ModelAndView mv = new ModelAndView("home");//("redirect:/home");
+		ModelAndView mv = new ModelAndView("home");
 		mv.addObject("product", product);
 		mv.addObject("isAdminClickedProducts", "true");
 		mv.addObject("productList", productDAO.list());

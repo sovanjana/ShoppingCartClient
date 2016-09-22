@@ -65,7 +65,7 @@ public class ProductController {
 		/*model.addAttribute("supplierList", supplierDAO.list());*/
 		
 		log.debug("listProduct method ends...");
-		return "redirect:/adminProduct";
+		return "redirect:/admin/adminProduct";
 	}
 	/*
 	 * method : saveOrUpdateProduct 
@@ -123,7 +123,7 @@ public class ProductController {
 	 * 
 	 * ${message}
 	 */
-	@RequestMapping("product/delete/{id}")
+	@RequestMapping("admin/product/delete/{id}")
 	public String deleteProduct(@PathVariable("id") String id, ModelMap model) throws Exception {
 		log.debug("deleteProduct method starts...");
 		
@@ -150,7 +150,7 @@ public class ProductController {
 	 * 	${isAdminClickedProducts}
 	 * 
 	 */
-	@RequestMapping("product/edit/{id}")
+	@RequestMapping("admin/product/edit/{id}")
 	public String editSelectedProduct(@PathVariable("id") String id, Model model, RedirectAttributes redirectAttributes){
 		
 		redirectAttributes.addFlashAttribute("selectedProduct", productDAO.get(id));

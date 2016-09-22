@@ -32,7 +32,9 @@
 				<div class="col-md-6 col-md-offset-3">
 					<div class="table-responsive">
 						<h2>Manage Product</h2>
+						
 						<c:url var="addProduct" value="/product/saveorupdate"></c:url>
+						
 						<form:form action="${addProduct}" commandName="product" enctype="multipart/form-data">
 
 							<table class="table table-condensed">
@@ -119,9 +121,9 @@
 								
 								<tr>
 									<td colspan="2">
-										<%-- <c:if test="${!empty product.name}">
+										<c:if test="${!empty product.name}">
 											<input type="submit" class="btn btn-info" value="Edit Product" />
-										</c:if> --%> 
+										</c:if> 
 										<c:if test="${empty product.name}">
 											<input type="submit" class="btn btn-info" value="Add Product" />
 										</c:if>
@@ -135,10 +137,10 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="table-responsive">
-						<h2>Product List</h2>
+						<h2 style="text-align: center;background-color: gold;">Product List</h2>
 						<c:if test="${!empty productList}">
 							<table class="table table-condensed">
-								<tr>
+								<tr style="background-color: #e6e6ff;">
 									<th width="80">Product ID</th>
 									<th width="120">Product Name</th>
 									<th width="120">Product Description</th>
@@ -146,6 +148,7 @@
 									<th width="80">Product Category</th>
 									<th width="80">Product Supplier</th>
 									<th width="60">Image</th>
+									<th width="60">Edit</th>
 									<th width="60">Delete</th>
 								</tr>
 								<c:forEach items="${productList}" var="product">
@@ -157,11 +160,12 @@
 										<td>${product.category.name}</td>
 										<td>${product.supplier.name}</td>
 										<td><img src="${pageContext.request.contextPath}/${product.productImage}" style="width : 60px"/></td>
-										<%-- <td>
-											<a href="<c:url value='product/edit/${product.id}'/>" class="btn btn-info" role="button">Edit</a>
-										</td> --%>
 										<td>
-											<a href="<c:url value='product/delete/${product.id}'/>" class="btn btn-info" role="button">Delete</a>
+											<a href="<c:url value='product/edit/${product.id}'/>" class="btn btn-info" role="button">Edit</a>
+										</td>
+										<td>
+											<a href="<c:url value='product/delete/${product.id}'/>" class="btn btn-danger" role="button"><span
+											class="fa fa-remove"></span>  Delete</a>
 										</td>
 									</tr>
 								</c:forEach>

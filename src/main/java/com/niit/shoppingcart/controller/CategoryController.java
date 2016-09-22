@@ -49,7 +49,7 @@ Logger log = LoggerFactory.getLogger(CategoryController.class);
 		model.addAttribute("categoryList", categoryDAO.list());
 		
 		log.debug("listCategory method ends....");
-		return "redirect:/adminCategory";
+		return "redirect:/admin/adminCategory";
 	}	
 	/*
 	 *  method : saveOrUpdateCategory
@@ -78,7 +78,7 @@ Logger log = LoggerFactory.getLogger(CategoryController.class);
 	 *  
 	 *  ${message}
 	 */
-	@RequestMapping("category/delete/{id}")
+	@RequestMapping("admin/category/delete/{id}")
 	public String deleteCategory(@PathVariable("id") String id, ModelMap model) throws Exception{
 		log.debug("deleteCategory method starts....");
 		
@@ -105,7 +105,7 @@ Logger log = LoggerFactory.getLogger(CategoryController.class);
 	 *  ${selectedCategory}
 	 *  ${selectedCategoryList}
 	 */
-	@RequestMapping(value = "category/edit/{id}")
+	@RequestMapping(value = "admin/category/edit/{id}")
 	public String editSelectedCategory(@PathVariable("id") String id, Model model, RedirectAttributes redirectAttributes){
 		
 		redirectAttributes.addFlashAttribute("selectedCategory", categoryDAO.get(id));

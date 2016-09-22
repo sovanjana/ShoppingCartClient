@@ -30,13 +30,13 @@
 <link href="resources/css/owl.theme.css" rel="stylesheet">
 </head>
 
-<body>
+<body style="background-color: oldlace;">
 	<div class="container">
 		<div class="contact-us-area k-padding">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
 					<fieldset>
-					<legend>Join Us</legend>
+					<h2 style="text-align: center;background-color: gold;">Join Us</h2>
 					
 					<div class="form-inner">
 						<form:form commandName="userDetails" method="post">

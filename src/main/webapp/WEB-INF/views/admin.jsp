@@ -31,9 +31,9 @@
 	<div class="container">
 	<div class="row">
 		<div id="admin">
-			<a href="adminProduct">Manage Product    |</a>
+			<!-- <a href="adminProduct">Manage Product    |</a>
 			<a href="adminCategory">|    Manage Category    |</a>
-			<a href="adminSupplier">|    Manage Supplier</a>
+			<a href="adminSupplier">|    Manage Supplier</a> -->
 			<br>
 		</div>
 	</div>

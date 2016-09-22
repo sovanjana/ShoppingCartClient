@@ -3,7 +3,9 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="security"%>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -36,7 +38,12 @@
             <div class="row">
                 <div class="col-lg-12">
                     <ul class="breadcrumb">
-                        <li><a href="/ShoppingCartClient/">Home</a></li>
+                        <security:authorize access="hasAnyRole('ROLE_USER,ROLE_ADMIN')">
+							<li><a href="/ShoppingCartClient/home">Home</a></li>
+						</security:authorize>
+						<security:authorize access="isAnonymous()">
+							<li><a href="/ShoppingCartClient/">Home</a></li>
+						</security:authorize>
                         <li class="active">Product Details</li>
                     </ul>
                 </div>
@@ -67,7 +74,7 @@
                                     | <a class="add-review" href="#">Add Your Review</a>
                                 </div>
                                 <div class="pro-price">
-                                    <span class="normal">${product.price}</span>
+                                    <span class="normal fa fa-inr">  ${product.price}</span>
                                 </div>
                                 <hr class="page-divider">
                                 <div class="product-desc">

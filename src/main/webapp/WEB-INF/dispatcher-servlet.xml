@@ -71,5 +71,5 @@
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:resources mapping="/admin/resources/**" location="/admin/resources/" />
-	
+	<mvc:resources mapping="/user/cart/resources/**" location="/user/cart/resources/" />
 </beans>

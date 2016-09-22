@@ -47,7 +47,7 @@ public class SupplierController {
 		model.addAttribute("supplierList", supplierDAO.list());
 		
 		log.debug("listSupplier method ends....");
-		return "redirect:/adminSupplier";
+		return "redirect:/admin/adminSupplier";
 	}	
 	/*
 	 * 	..........list ends...........
@@ -80,7 +80,7 @@ public class SupplierController {
 	 *  
 	 *  ${message}
 	 */
-	@RequestMapping("supplier/delete/{id}")
+	@RequestMapping("admin/supplier/delete/{id}")
 	public String deleteSupplier(@PathVariable("id") String id, ModelMap model) throws Exception{
 		log.debug("deleteSupplier method starts....");
 		
@@ -106,7 +106,7 @@ public class SupplierController {
 	 *  
 	 *  
 	 */
-	@RequestMapping(value = "supplier/edit/{id}")
+	@RequestMapping(value = "admin/supplier/edit/{id}")
 	public String editSelectedSupplier(@PathVariable("id") String id, Model model, RedirectAttributes redirectAttributes){
 		
 		redirectAttributes.addFlashAttribute("selectedSupplier", supplierDAO.get(id));
