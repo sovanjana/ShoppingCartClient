@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow  
+						http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd">
+
+	<var name="billingAddress" class="com.niit.shoppingcart.model.BillingAddress" />
+	<var name="cart" class="com.niit.shoppingcart.model.Cart" />
+	<var name="cartItem" class="com.niit.shoppingcart.model.CartItem" />
+	<!-- <var name="userDetails" class="com.niit.shoppingcart.model.UserDetails" /> -->
+	<var name="checkoutDetails" class="com.niit.shoppingcart.view.CheckoutDetails" />
+	<var name="orderDetail" class="com.niit.shoppingcart.model.Order" />
+
+	<!-- Executed when webFlow is triggered -->
+	<on-start>
+		<evaluate expression="checkoutFlowHandler.initFlow()" result="flowScope.checkoutDetails" />
+	</on-start>
+
+	<!-- if starting point is not specified the first view state is the starting state -->
+	<view-state id="checkout" view="billingAddress" model="billingAddress">
+		<transition on="proceed" to="confirmOrder" />
+		<transition on="cancel" to="start" />
+	</view-state>
+
+	<action-state id="confirmOrder">
+		<evaluate expression="checkoutFlowHandler.addBillingAddress(flowScope.checkoutDetails,billingAddress)" />
+		<transition on="success" to="orderConfirm" />
+		<transition on="failure" to="checkout" />
+	</action-state>
+
+	<view-state id="orderConfirm" view="orderConfirm">
+		<transition on="saveSuccess" to="thankyou" />
+	</view-state>
+	
+	<action-state id="saveToDatabase">
+		<evaluate expression="billingAddressDAO.saveOrUpdate(billingAddress)"></evaluate>
+		<transition on="yes" to="thankyou" />
+		<transition on="no" to="exception"/>
+	</action-state>
+	
+	<view-state id="thankyou" view="thankyou"/>	
+	
+	<end-state id="endFlow" view="home" />	
+	
+	<end-state id="toThankyou" view="externalRedirect:contextRelative:thankyou.jsp" />
+	<end-state id="toException" view="externalRedirect:contextRelative:exception.jsp" />
+
+	<!-- these events are available in every state-->
+	<global-transitions>		
+		<transition on="home" to="toHome"/>
+		<transition on="error" to="toException"/>
+	</global-transitions>
+	
+</flow>	

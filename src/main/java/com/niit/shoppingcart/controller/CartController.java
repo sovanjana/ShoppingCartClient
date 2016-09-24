@@ -51,6 +51,7 @@ public class CartController {
 	@RequestMapping("/user/cart/")
 	public ModelAndView viewCart(Model model, Principal userName,
 			@RequestParam(value = "cartItemRemoved", required = false) String cartItemRemoved) {
+		
 		ModelAndView mv = new ModelAndView("viewcart");
 		String userId = userName.getName();
 		if (cartItemRemoved != null) {
@@ -78,13 +79,20 @@ public class CartController {
 	@RequestMapping("/user/cart/remove/{cartItemId}")
 	public String removeCartItems(@PathVariable("cartItemId") String cartItemId, Model model, Principal username) {
 		System.out.println("delete from cartitem method...");
+		
 		cartItem = cartItemDAO.get(cartItemId);
+		
 		System.out.println("deletexxx from cartitem method...");
+		
 		String userId = cartItem.getUserId();
 		String cartId = cartItem.getCartId();
+		
 		System.out.println("before delete method");
+		
 		cartItemDAO.delete(cartItem);
+		
 		System.out.println("after delete method");
+		
 		int countProducts = updateCartAgain(cartId, userId);
 		
 		model.addAttribute("countProducts", countProducts);

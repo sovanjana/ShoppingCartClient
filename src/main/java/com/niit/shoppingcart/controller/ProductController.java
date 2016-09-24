@@ -57,13 +57,9 @@ public class ProductController {
 	 */
 	@RequestMapping(value = "/product", method = RequestMethod.GET)
 	public String listProduct(Model model){
-		log.debug("listProduct method starts...");
-		
+		log.debug("listProduct method starts...");		
 		model.addAttribute("product", new Product());
-		model.addAttribute("productList", this.productDAO.list());
-		
-		/*model.addAttribute("supplierList", supplierDAO.list());*/
-		
+		model.addAttribute("productList", this.productDAO.list());		
 		log.debug("listProduct method ends...");
 		return "redirect:/admin/adminProduct";
 	}
@@ -125,8 +121,7 @@ public class ProductController {
 	 */
 	@RequestMapping("admin/product/delete/{id}")
 	public String deleteProduct(@PathVariable("id") String id, ModelMap model) throws Exception {
-		log.debug("deleteProduct method starts...");
-		
+		log.debug("deleteProduct method starts...");		
 		try{
 			product = productDAO.get(id);
 			productDAO.delete(product);
@@ -135,17 +130,12 @@ public class ProductController {
 		catch(Exception e){
 			model.addAttribute("message", e.getMessage());
 			e.printStackTrace();
-		}
-		
+		}		
 		log.debug("deleteProduct method ends...");
 		return "redirect:/product";
 	}
 	/* 
-	 * 	..........Delete ends...........
-	 * 
-	 *	..........Edit starts...........
-	 * 
-	 * 	method : editProduct 
+	 * 	method : editSelectedProduct 
 	 * 
 	 * 	${isAdminClickedProducts}
 	 * 
@@ -184,6 +174,7 @@ public class ProductController {
 	@RequestMapping(value = "product/get/{id}")
 	public String getSelectedProduct(@PathVariable("id") String id, Model model, RedirectAttributes redirectAttributes) {
 		
+		System.out.println("method getSelectedProduct(ProductController) is here...");
 		redirectAttributes.addFlashAttribute("selectedProduct", productDAO.get(id));
 		redirectAttributes.addFlashAttribute("isUserClickedSingleProduct", "true");
 		
@@ -198,9 +189,9 @@ public class ProductController {
 	public String singleProduct(@ModelAttribute("selectedProduct") final Object selectedProduct, Model model) {
 
 		model.addAttribute("product", selectedProduct);
-		//model.addAttribute("categoryList", this.categoryDAO.list());
+		model.addAttribute("categoryList", this.categoryDAO.list());
 
-		return "/home";
+		return "home";
 	}
 	
 }

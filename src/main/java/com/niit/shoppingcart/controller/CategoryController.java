@@ -43,11 +43,9 @@ Logger log = LoggerFactory.getLogger(CategoryController.class);
 	 */
 	@RequestMapping(value="/category", method = RequestMethod.GET)
 	public String listCategory(Model model){
-		log.debug("listCategory method starts....");
-		
+		log.debug("listCategory method starts....");		
 		model.addAttribute("category", new Category());
-		model.addAttribute("categoryList", categoryDAO.list());
-		
+		model.addAttribute("categoryList", categoryDAO.list());		
 		log.debug("listCategory method ends....");
 		return "redirect:/admin/adminCategory";
 	}	
@@ -60,16 +58,19 @@ Logger log = LoggerFactory.getLogger(CategoryController.class);
 	public String saveOrUpdateCategory(@Valid @ModelAttribute("category") Category category, BindingResult result, Model model){
 		log.debug("saveOrUpdateCategory method startss....");
 		
-		if(result.hasErrors()){
-			return "redirect:/category";
+		try {
+			if (result.hasErrors()) {
+				return "redirect:/category";
+			}
+			String newID = Util.removeComma(category.getId());
+			category.setId(newID);
+			model.addAttribute("addCategory", categoryDAO.saveOrUpdate(category));
+			model.addAttribute("addedCategory", "true");
+			model.addAttribute("ctgAddedMsg", "Category added successfully...");
+		} catch (Exception e) {
+			model.addAttribute("message", e.getMessage());
+			e.printStackTrace();
 		}
-		String newID = Util.removeComma(category.getId());
-		category.setId(newID);
-		
-		model.addAttribute("addCategory", categoryDAO.saveOrUpdate(category));
-		model.addAttribute("addedCategory", "true");
-		model.addAttribute("ctgAddedMsg", "Category added successfully...");
-		
 		log.debug("saveOrUpdateCategory method ends....");
 		return "redirect:/category";
 	}
@@ -96,8 +97,6 @@ Logger log = LoggerFactory.getLogger(CategoryController.class);
 		return "redirect:/category";
 	}
 	/* 
-	 * 	..........Delete ends...........
-	 * 
 	 *	..........Edit starts...........  
 	 * 
 	 *  method : editSelectedCategory

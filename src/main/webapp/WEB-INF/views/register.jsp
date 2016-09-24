@@ -3,7 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 <head>
 <meta charset="utf-8">
@@ -54,8 +54,8 @@
 							</div>
 
 							<div class="one-half">
-								<form:input type="text" path="name" required="true"
-									title="name should not be empty" placeholder="UserName" />
+								<form:input type="text" path="name" required="true" pattern=".{3,}"
+									title="name is too small." placeholder="UserName" />
 								<!-- to display validation message -->
 								<c:forEach
 									items="${flowRequestContext.messageContext.getMessagesBySource('name')}"
@@ -77,7 +77,7 @@
 							</div>
 
 							<div class="one-half">
-								<form:input type="text" path="phone" pattern=".{10}" required="true"
+								<form:input type="text" path="phone" pattern=".{10}" required="true" title="Format : 0123456789"
 									placeholder="Phone No." />
 								<!-- to display validation message -->
 								<c:forEach
@@ -88,7 +88,7 @@
 							</div>
 
 							<div class="one-half">
-								<form:input path="address" type="text" required="true"
+								<form:input path="address" type="text" required="true" pattern=".{5,}" title="address is too small"
 									placeholder="Address" />
 								<!-- to display validation message -->
 								<c:forEach
@@ -99,7 +99,7 @@
 							</div>
 
 							<div class="one-half">
-								<form:input type="text" path="email" required="true"
+								<form:input type="text" path="email" required="true" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" title="match email pattern."
 									placeholder="Email" />
 								<!-- to display validation message -->
 								<c:forEach

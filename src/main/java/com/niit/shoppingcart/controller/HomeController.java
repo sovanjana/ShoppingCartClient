@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.niit.shoppingcart.dao.CartDAO;
 import com.niit.shoppingcart.dao.CategoryDAO;
@@ -60,10 +59,10 @@ public class HomeController {
 		
 		ModelAndView mv = new ModelAndView("home");
 		session.setAttribute("category", category);
+		
 		System.out.println("reached home...");
 		session.setAttribute("categoryList", categoryDAO.list());
-		session.setAttribute("supplierList", supplierDAO.list());
-				
+		session.setAttribute("supplierList", supplierDAO.list());				
 		System.out.println("This is home page....");
 		
 		log.debug("onLoad method ends....");

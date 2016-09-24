@@ -3,7 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 		<meta charset="utf-8">
@@ -12,19 +12,19 @@
 		<title>Shopping Cart</title>
 		
 		<!-- Bootstrap and Font Awesome css -->
-		<link href="resources/css/font-awesome.css" rel="stylesheet">
-		<link href="resources/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../resources/css/font-awesome.css" rel="stylesheet">
+		<link href="../resources/css/bootstrap.min.css" rel="stylesheet">
 		
 		<!-- Theme stylesheet -->
-		<link href="resources/css/style.default.css" rel="stylesheet"
+		<link href="../resources/css/style.default.css" rel="stylesheet"
 			id="theme-stylesheet">
 		
 		<!-- favicon -->
-		<link rel="shortcut icon" href="resources/favicon.png">
+		<link rel="shortcut icon" href="../resources/favicon.png">
 		
 		<!-- owl carousel css -->
-		<link href="resources/css/owl.carousel.css" rel="stylesheet">
-		<link href="resources/css/owl.theme.css" rel="stylesheet">
+		<link href="../resources/css/owl.carousel.css" rel="stylesheet">
+		<link href="../resources/css/owl.theme.css" rel="stylesheet">
 		
 	</head>
 <body>
@@ -55,7 +55,7 @@
 									</c:when>
 									<c:otherwise>
 										<td>
-											<form:input path="id" pattern=".{6,10}" required="true" title="id should contains 6-10 characters." />
+											<form:input path="id" pattern=".{6,10}" required="true" title="id should contain 6-10 characters." />
 										</td>
 									</c:otherwise>
 								</c:choose>
@@ -63,26 +63,28 @@
 							</tr>
 							<tr>
 								<td>
-									<form:label path="name">
+									<form:label path="name" >
 										<spring:message text="CategoryName" />
 									</form:label>
 								</td>
 								<td>
-									<form:input path="name" required="true" />
+									<form:input path="name" required="true" pattern=".{3,}" title="category name is too small." />
 								</td>
 								<td>
 									<form:errors path="name" cssClass="error"/>
-								</td>								
+								</td>							
 							</tr>
 							<tr>
 								<td>
-									<form:label path="description">
+									<form:label path="description" >
 										<spring:message text="CategoryDescription" />
 									</form:label>
 								</td>
 								<td>
-									<form:input path="description" required="true" />
-									<form:errors path="description" cssClass="error"/>
+									<form:input path="description" required="true" pattern=".{10,}" title="description is too small." />
+								</td>
+								<td>
+									<form:errors path="description" cssClass="error"/>									
 								</td>
 							</tr>
 							<tr>
@@ -136,9 +138,9 @@
 
 
 	<!--  JAVASCRIPT FILES  -->
-	<script src="resources/js/jquery-1.11.0.min.js"></script>
-	<script src="resources/js/bootstrap.min.js"></script>
-	<script src="resources/js/jquery.cookie.js"></script>
-	<script src="resources/js/front.js"></script>
+	<script src="../resources/js/jquery-1.11.0.min.js"></script>
+	<script src="../resources/js/bootstrap.min.js"></script>
+	<script src="../resources/js/jquery.cookie.js"></script>
+	<script src="../resources/js/front.js"></script>
 </body>
 </html>

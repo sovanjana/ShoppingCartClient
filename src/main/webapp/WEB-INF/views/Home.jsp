@@ -7,7 +7,7 @@
 	prefix="security"%>
 <%@ page isELIgnored="false"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 <head>
 <meta charset="utf-8">
@@ -50,7 +50,7 @@
 	<div class="container">
 
 		<div class="navbar-header">
-			<a class="btn btn-primary navbar-toggle" href="user/cart" style="border-color: #204d74;background-color: #286090;"> <i
+			<a class="btn btn-primary navbar-toggle floatleft" href="user/cart" style="border-color: #204d74;background-color: #286090;"> <i
 				class="fa fa-shopping-cart"></i> <span class="hidden-xs"></span>
 			</a>
 			<c:if test="${pageContext.request.userPrincipal.name == null}">				

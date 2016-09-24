@@ -6,32 +6,33 @@
 <%@ page isELIgnored="false"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"></c:set>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!DOCTYPE html >
+
 <html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Shopping Cart</title>
-
-<!-- Bootstrap and Font Awesome css -->
-<link href="resources/css/font-awesome.css" rel="stylesheet">
-<link href="resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="resources/css/jquery-ui.min.css" rel="stylesheet">
-
-<link href="resources/css/responsive.css" rel="stylesheet">
-
-<!-- Theme stylesheet -->
-<link href="resources/css/style.default.css" rel="stylesheet"
-	id="theme-stylesheet">
-
-<!-- favicon -->
-<link rel="shortcut icon" href="resources/favicon.png">
-
-<!-- owl carousel css -->
-<link href="resources/css/owl.carousel.css" rel="stylesheet">
-<link href="resources/css/owl.theme.css" rel="stylesheet">
-</head>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">	
+		<title>Shopping Cart</title>
+		
+		<!-- Bootstrap and Font Awesome css -->
+		<link href="../../resources/css/font-awesome.css" rel="stylesheet">
+		<link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../../resources/css/jquery-ui.min.css" rel="stylesheet">
+		
+		<link href="../../resources/css/responsive.css" rel="stylesheet">
+		
+		<!-- Theme stylesheet -->
+		<link href="../../resources/css/style.default.css" rel="stylesheet"
+			id="theme-stylesheet">
+		
+		<!-- favicon -->
+		<link rel="shortcut icon" href="../../resources/favicon.png">
+		
+		<!-- owl carousel css -->
+		<link href="../../resources/css/owl.carousel.css" rel="stylesheet">
+		<link href="../../resources/css/owl.theme.css" rel="stylesheet">
+	</head>
 
 <body style="background-color: oldlace;">
 	<div class="container">
@@ -64,7 +65,7 @@
 									<th width="120">Product Name</th>
 									<th width="120">Product Image</th>
 									<th width="80">Product Name</th>
-									<th width="80">Product Quantity</span></th>
+									<th width="80">Product Quantity</th>
 									<th width="80">Total Price</th>
 									<th width="60">Remove</th>
 								</tr>
@@ -119,9 +120,9 @@
 
 
 	<!--  JAVASCRIPT FILES  -->
-	<script src="resources/js/jquery-1.11.0.min.js"></script>
-	<script src="resources/js/bootstrap.min.js"></script>
-	<script src="resources/js/jquery.cookie.js"></script>
-	<script src="resources/js/front.js"></script>
+	<script src="../../resources/js/jquery-1.11.0.min.js"></script>
+	<script src="../../resources/js/bootstrap.min.js"></script>
+	<script src="../../resources/js/jquery.cookie.js"></script>
+	<script src="../../resources/js/front.js"></script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -11,19 +11,19 @@
 		<title>Shopping Cart</title>
 		
 		<!-- Bootstrap and Font Awesome css -->
-		<link href="resources/css/font-awesome.css" rel="stylesheet">
-		<link href="resources/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../resources/css/font-awesome.css" rel="stylesheet">
+		<link href="../resources/css/bootstrap.min.css" rel="stylesheet">
 		
 		<!-- Theme stylesheet -->
-		<link href="resources/css/style.default.css" rel="stylesheet"
+		<link href="../resources/css/style.default.css" rel="stylesheet"
 			id="theme-stylesheet">
 		
 		<!-- favicon -->
 		<link rel="shortcut icon" href="resources/favicon.png">
 		
 		<!-- owl carousel css -->
-		<link href="resources/css/owl.carousel.css" rel="stylesheet">
-		<link href="resources/css/owl.theme.css" rel="stylesheet">
+		<link href="../resources/css/owl.carousel.css" rel="stylesheet">
+		<link href="../resources/css/owl.theme.css" rel="stylesheet">
 		
 	</head>
 	<body>
@@ -68,7 +68,7 @@
 										</form:label>
 									</td>
 									<td>
-										<form:input path="name" required="true" />
+										<form:input path="name" required="true" pattern=".{5,}" title="description is too small." />
 									</td>
 								</tr>
 								<tr>
@@ -78,7 +78,7 @@
 										</form:label>
 									</td>
 									<td>
-										<form:input path="description" required="true" />
+										<form:input path="description" required="true" pattern=".{10,}" title="description is too small."/>
 									</td>
 								</tr>
 								<tr>
@@ -179,9 +179,9 @@
 		
 			
 		<!--  JAVASCRIPT FILES  -->
-		<script src="resources/js/jquery-1.11.0.min.js"></script>
-		<script src="resources/js/bootstrap.min.js"></script>
-		<script src="resources/js/jquery.cookie.js"></script>
-		<script src="resources/js/front.js"></script>
+		<script src="../resources/js/jquery-1.11.0.min.js"></script>
+		<script src="../resources/js/bootstrap.min.js"></script>
+		<script src="../resources/js/jquery.cookie.js"></script>
+		<script src="../resources/js/front.js"></script>
 	</body>
 </html>

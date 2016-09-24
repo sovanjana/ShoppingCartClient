@@ -27,18 +27,14 @@
 	
 	<action-state id="saveToDatabase">
 		<evaluate expression="userDetailsDAO.save(userDetails)"></evaluate>
-		<!-- <transition on="yes" to="home" /> -->
 		<transition on="yes" to="welcome" />
 		<transition on="no" to="exception" />
 	</action-state>
 	
 	<view-state id="welcome" view="welcome" />
 			
-	<end-state id="endFlow" view="home" />
-	<!-- <end-state id="home" view="home" /> -->
-	
+	<end-state id="endFlow" view="home" />		
 	<end-state id="toWelcome" view="externalRedirect:contextRelative:welcome.jsp" />
-
 	<end-state id="toException" view="externalRedirect:contextRelative:exception.jsp" />
  
 	<!-- these events are available in every state-->

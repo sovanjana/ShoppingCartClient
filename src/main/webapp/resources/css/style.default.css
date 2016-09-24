@@ -47,6 +47,9 @@ html, body {height: 100%;}
 .contact-us-area .form-inner .single-input {
   margin-bottom:20px;
 }
+.one{
+	padding: 5px;
+}
 .one-half {
   float: left;
   width: 50%;
