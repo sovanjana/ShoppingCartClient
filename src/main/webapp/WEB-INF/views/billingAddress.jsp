@@ -41,6 +41,14 @@
 					<div class="form-inner">
 						<form:form commandName="billingAddress" method="post">
 
+							<%-- <div class="one">
+								<form:input path="billingAddressId" type="text" pattern=".{5,200}"
+									required="true" placeholder="Billing_Address_Id" />
+								<!-- to display validation message -->
+								<c:forEach items="${flowRequestContext.messageContext.getMessagesBySource('billingAddressId')}" var="err">
+						  			${err.text}
+								</c:forEach>
+							</div> --%>
 							<div class="one">
 								<form:input path="line1" type="text" pattern=".{5,500}"
 									required="true" title="address is too small"

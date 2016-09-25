@@ -1,12 +1,9 @@
 package com.niit.shoppingcart.handler;
 
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.binding.message.MessageBuilder;
-import org.springframework.binding.message.MessageContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
@@ -53,61 +50,24 @@ public class CheckoutFlowHandler {
 	CheckoutDetails checkoutDetails = new CheckoutDetails();
 
 	public CheckoutDetails initFlow() {
+		System.out.println("reached initFlow method of CheckOutFlowHandler...");
+		
 		userDetails = userDetailsDAO.get(SecurityContextHolder.getContext().getAuthentication().getName());
 		checkoutDetails.setCart(cartDAO.getCartByUserId(userDetails.getId()));
 		checkoutDetails.setUserDetails(userDetailsDAO.get(userDetails.getName()));
+		
+		System.out.println("leaving initFlow method of CheckOutFlowHandler...");
 		return checkoutDetails;
 	}
 	
-	/*public String validateDetails(CheckoutDetails checkoutDetails, BillingAddress billingAddress, MessageContext messageContext){
+	public String addBillingAddress(CheckoutDetails checkoutDetails, BillingAddress billingAddress, UserDetails userDetails) {
+		System.out.println("reached addBillingAddress method of CheckOutFlowHandler...");
 		
-		String status = "success";
-		
-		this.billingAddress.setUserId(userDetails.getId());
-		
-		if(billingAddress.getLine1().isEmpty()){
-			messageContext.addMessage(new MessageBuilder().error().source("line1").defaultText("line1 cannot be Empty").build());
-		
-			status = "failure";
-		}		
-		if(billingAddress.getCity().isEmpty()){
-			messageContext.addMessage(new MessageBuilder().error().source("city").defaultText("city name cannot be Empty").build());
-		
-			status = "failure";
-		}		
-		if(billingAddress.getState().isEmpty()){
-			messageContext.addMessage(new MessageBuilder().error().source("state").defaultText("state name cannot be Empty").build());
-		
-			status = "failure";
-		}		
-		if(billingAddress.getCountry().isEmpty()){
-			messageContext.addMessage(new MessageBuilder().error().source("country").defaultText("country name cannot be Empty").build());
-		
-			status = "failure";
-		}		
-		if(billingAddress.getZipCode().isEmpty()){
-			messageContext.addMessage(new MessageBuilder().error().source("zipCode").defaultText("Zip Code is mandatory").build());
-		
-			status = "failure";
-		}		
-		return status;
-	}*/
-
-	public String addBillingAddress(CheckoutDetails checkoutDetails, BillingAddress billingAddress) {
-		System.out.println("i'm in addBillingAddress method...1");
-		
-		userDetails = userDetailsDAO.getUserDetailsByName(SecurityContextHolder.getContext().getAuthentication().getName());
-		
-		System.out.println("i'm in addBillingAddress method...2");
-		
+		userDetails = userDetailsDAO.get(SecurityContextHolder.getContext().getAuthentication().getName());
 		billingAddress.setUserId(userDetails.getId());
+		checkoutDetails.setBillingAddress(billingAddress);	
 		
-		System.out.println("i'm in addBillingAddress method...3");
-		
-		checkoutDetails.setBillingAddress(billingAddress);
-				
-		System.out.println("i'm in addBillingAddress method...4");
-		
+		this.billingAddress.setBillingAddressId(billingAddress.getBillingAddressId());
 		this.billingAddress.setUserId(userDetails.getId());
 		this.billingAddress.setLine1(billingAddress.getLine1());
 		this.billingAddress.setLine2(billingAddress.getLine2());
@@ -116,6 +76,7 @@ public class CheckoutFlowHandler {
 		this.billingAddress.setCountry(billingAddress.getCountry());
 		this.billingAddress.setZipCode(billingAddress.getZipCode());
 		
+		System.out.println("leaving addBillingAddress method of CheckOutFlowHandler...");
 		return "success";
 	}
 	

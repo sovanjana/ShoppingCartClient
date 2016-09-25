@@ -7,7 +7,7 @@
 	<var name="billingAddress" class="com.niit.shoppingcart.model.BillingAddress" />
 	<var name="cart" class="com.niit.shoppingcart.model.Cart" />
 	<var name="cartItem" class="com.niit.shoppingcart.model.CartItem" />
-	<!-- <var name="userDetails" class="com.niit.shoppingcart.model.UserDetails" /> -->
+	<var name="userDetails" class="com.niit.shoppingcart.model.UserDetails" />
 	<var name="checkoutDetails" class="com.niit.shoppingcart.view.CheckoutDetails" />
 	<var name="orderDetail" class="com.niit.shoppingcart.model.Order" />
 
@@ -23,7 +23,7 @@
 	</view-state>
 
 	<action-state id="confirmOrder">
-		<evaluate expression="checkoutFlowHandler.addBillingAddress(flowScope.checkoutDetails,billingAddress)" />
+		<evaluate expression="checkoutFlowHandler.addBillingAddress(flowScope.checkoutDetails,billingAddress,userDetails)" />
 		<transition on="success" to="orderConfirm" />
 		<transition on="failure" to="checkout" />
 	</action-state>

@@ -30,7 +30,7 @@
 <link href="resources/css/owl.theme.css" rel="stylesheet">
 </head>
 
-<body>
+<body style="background-color: oldlace;">
 	<div class="container">
 		<div class="contact-us-area k-padding">
 			<div class="row">
@@ -40,6 +40,7 @@
 					
 						<div class="form-inner">
 							<div class="reg-button k-padding-top-4">
+								<h4 style="font-style: oblique; color: goldenrod;">Your Product will delivered within 7 days...</h4>
 								<a href="home" class="kp-button floatleft" >Back to Home</a>
 							</div>
 						</div>
