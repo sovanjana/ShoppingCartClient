@@ -5,6 +5,6 @@ public class Util {
 		return name.replace(",", "");
 	}
 	public static void main(String[] args) {
-		System.out.println(Util.removeComma(",CTG001"));
+		System.out.println(Util.removeComma("CTG001"));
 	}
 }

@@ -71,9 +71,11 @@ public class ProductController {
 	@RequestMapping(value = "/product/saveorupdate", method = RequestMethod.POST)
 	public String saveOrUpdateProduct(@ModelAttribute("product") Product product, HttpServletRequest request, 
 										@RequestParam("file") MultipartFile file){
+		System.out.println("bbbbb"+product.getId());
 		log.debug("saveOrUpdateProduct method starts...");
 		
 		String newID = Util.removeComma(product.getId());
+		System.out.println("aaaaaaaa"+newID);
 		product.setId(newID);
 		
 		byte fileBytes[];

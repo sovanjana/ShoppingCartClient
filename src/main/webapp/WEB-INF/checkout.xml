@@ -33,7 +33,9 @@
 	</view-state>
 	
 	<action-state id="saveToDatabase">
-		<evaluate expression="billingAddressDAO.saveOrUpdate(billingAddress)"></evaluate>
+		<!-- <evaluate expression="billingAddressDAO.saveOrUpdate(billingAddress)"></evaluate> -->
+		<!-- <evaluate expression="billingAddressDAO.saveOrUpdate(checkoutDetails.getBillingAddress())"></evaluate> -->
+		<evaluate expression="checkoutFlowHandler.saveOrderDetails(flowScope.checkoutDetails,billingAddress)"></evaluate>
 		<transition on="yes" to="thankyou" />
 		<transition on="no" to="exception"/>
 	</action-state>

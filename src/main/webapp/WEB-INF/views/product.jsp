@@ -49,7 +49,7 @@
 									<c:choose>
 										<c:when test="${!empty product.id}">
 											<td>
-												<form:input path="id" disabled="true" readonly="true" />
+												<form:input path="id" readonly="true" />
 											</td>
 										</c:when>
 										<c:otherwise>
@@ -58,10 +58,8 @@
 											</td>
 										</c:otherwise>
 									</c:choose>
-									<form:hidden path="id" />
 								</tr>
 								<tr>
-									<form:input path="id" hidden="true"/>
 									<td>
 										<form:label path="name">
 											<spring:message text="ProductName" />

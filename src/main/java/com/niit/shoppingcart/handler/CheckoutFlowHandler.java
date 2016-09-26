@@ -81,6 +81,7 @@ public class CheckoutFlowHandler {
 	}
 	
 	public String saveOrderDetails(){
+		System.out.println("reached saveOrderDetails method of CheckOutFlowHandler...");
 		//userDetails = userDetailsDAO.get(SecurityContextHolder.getContext().getAuthentication().getName());
 		//List<CartItem> list = cartItemDAO.getCartItemByUserId(userDetails.getId());
 		//cart = cartDAO.getCartByUserId(userDetails.getId());
@@ -88,11 +89,11 @@ public class CheckoutFlowHandler {
 		//cart.setUserId(cart.getUserId());
 		//cart.setCountProducts(list.size());
 		//cartDAO.saveOrUpdate(cart);
-		
+		billingAddressDAO.saveOrUpdate(billingAddress);
 		billingAddressDAO.saveOrUpdate(checkoutDetails.getBillingAddress());
 		
 		//httpSession.setAttribute("countProducts", cart.getCountProducts());
-		
+		System.out.println("leaving saveOrderDetails method of CheckOutFlowHandler...");
 		return "success";
 	}
 	
